@@ -14,6 +14,10 @@
 		1BA762AF1F328303003CCB25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BA762AD1F328303003CCB25 /* LaunchScreen.storyboard */; };
 		1BA762BA1F328303003CCB25 /* livevideobroadcasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762B91F328303003CCB25 /* livevideobroadcasterTests.swift */; };
 		1BA762C51F328303003CCB25 /* livevideobroadcasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */; };
+		1BA762D51F329057003CCB25 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D41F329057003CCB25 /* http.swift */; };
+		1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D61F329699003CCB25 /* AuthGateway.swift */; };
+		1BA762D91F3297F2003CCB25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D81F3297F2003CCB25 /* Post.swift */; };
+		1BA762DB1F32A2B9003CCB25 /* CallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762DA1F32A2B9003CCB25 /* CallbackProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		1BA762C01F328303003CCB25 /* livevideobroadcasterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = livevideobroadcasterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livevideobroadcasterUITests.swift; sourceTree = "<group>"; };
 		1BA762C61F328303003CCB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BA762D41F329057003CCB25 /* http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = http.swift; path = Http/http.swift; sourceTree = "<group>"; };
+		1BA762D61F329699003CCB25 /* AuthGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthGateway.swift; path = Authentication/AuthGateway.swift; sourceTree = "<group>"; };
+		1BA762D81F3297F2003CCB25 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Http/Post.swift; sourceTree = "<group>"; };
+		1BA762DA1F32A2B9003CCB25 /* CallbackProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CallbackProtocol.swift; path = Http/CallbackProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,10 @@
 				1BA762AB1F328303003CCB25 /* Assets.xcassets */,
 				1BA762AD1F328303003CCB25 /* LaunchScreen.storyboard */,
 				1BA762B01F328303003CCB25 /* Info.plist */,
+				1BA762D41F329057003CCB25 /* http.swift */,
+				1BA762D61F329699003CCB25 /* AuthGateway.swift */,
+				1BA762D81F3297F2003CCB25 /* Post.swift */,
+				1BA762DA1F32A2B9003CCB25 /* CallbackProtocol.swift */,
 			);
 			path = livevideobroadcaster;
 			sourceTree = "<group>";
@@ -259,8 +271,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */,
 				1BA762A71F328303003CCB25 /* ViewController.swift in Sources */,
+				1BA762DB1F32A2B9003CCB25 /* CallbackProtocol.swift in Sources */,
 				1BA762A51F328303003CCB25 /* AppDelegate.swift in Sources */,
+				1BA762D51F329057003CCB25 /* http.swift in Sources */,
+				1BA762D91F3297F2003CCB25 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
