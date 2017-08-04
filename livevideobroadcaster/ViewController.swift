@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         emailTextField.delegate = self
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
+        
     }
 
     //MARK: UITextFieldDelegate
@@ -38,14 +39,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginButton(_ sender: UIButton) {
         
         if checkFields() == true {
-            loginParams["email"] = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            loginParams["password"] = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            loginParams["time"] = String(NSDate().timeIntervalSince1970 / 1000)
-            if (loginURL == nil) {
-                    loginURL = authTest.setLoginPath()
-                    login()
-            }
-            
+            login()
         }
         
         else {
@@ -64,29 +58,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         return fieldsValid
     }
-
-    func getRequest() {
-        Alamofire.request("https://httpbin.org/get")
-        .responseJSON { (response) in
-            if let JSON = response.result.value {
-             print(JSON)
-            }
-        }
-    }
     
     func login() {
-        Alamofire.request(loginURL!, method: .post, parameters: loginParams, encoding: JSONEncoding.default)
-        .responseJSON { (response2) in
-            print(response2)
-            /*if let postResponse = response2.result.value {
-                print(postResponse)
+        
+        let timeString = String(NSDate().timeIntervalSince1970 / 1000)
+        let parameters = [
+            "email" : emailTextField.text!,
+            "password" : passwordTextField.text!,
+            "time" : timeString]
+        
+        Alamofire.request(URL(string: "https://testapi.fbfanadnetwork.com/users/login.php")!, method: .post, parameters: parameters, headers: nil)
+        .validate()
+        .responseJSON { (response3) -> Void in
+            if (response3 != nil) {
+                print(response3.result.value)
             }
-            
-            else {
-                print("FAIL")
-            }*/
-        }
 
+            else {
+                print("Sign-in error")
+            }
+        }
+        
     }
     
     
