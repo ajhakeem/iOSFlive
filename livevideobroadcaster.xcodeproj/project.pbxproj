@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */; };
+		1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F511F34001B0071A681 /* ScrollViewVC.swift */; };
 		1B9B14F61F330F2B0080DC6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F51F330F2B0080DC6B /* UIKit.framework */; };
 		1B9B14F81F330F390080DC6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F71F330F390080DC6B /* Foundation.framework */; };
 		1B9B14FA1F330F430080DC6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F91F330F430080DC6B /* AVFoundation.framework */; };
@@ -24,7 +25,6 @@
 		1BA762D51F329057003CCB25 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D41F329057003CCB25 /* http.swift */; };
 		1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D61F329699003CCB25 /* AuthGateway.swift */; };
 		1BA762D91F3297F2003CCB25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D81F3297F2003CCB25 /* Post.swift */; };
-		1BA762DB1F32A2B9003CCB25 /* CallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762DA1F32A2B9003CCB25 /* CallbackProtocol.swift */; };
 		B54AD687F8CB8FEDF70EE77C /* Pods_livevideobroadcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */; };
 		BB8C38760736BE6464D9B08C /* Pods_livevideobroadcasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC6E62D616F9C59125C3463 /* Pods_livevideobroadcasterTests.framework */; };
 		E4C13FF24FCE4811A7B8D9A4 /* Pods_livevideobroadcasterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */; };
@@ -63,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveKitVC.swift; sourceTree = "<group>"; };
+		1B541F511F34001B0071A681 /* ScrollViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewVC.swift; sourceTree = "<group>"; };
 		1B9B14E91F330E920080DC6B /* LFLiveKitFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LFLiveKitFramework.h; path = livevideobroadcaster/LFLiveKit/FrameWork/LFLiveKitFramework/LFLiveKitFramework.h; sourceTree = "<group>"; };
 		1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LFLiveKit.xcodeproj; path = livevideobroadcaster/LFLiveKit/FrameWork/LFLiveKit.xcodeproj; sourceTree = "<group>"; };
 		1B9B14F51F330F2B0080DC6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -87,7 +88,6 @@
 		1BA762D41F329057003CCB25 /* http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = http.swift; path = Http/http.swift; sourceTree = "<group>"; };
 		1BA762D61F329699003CCB25 /* AuthGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthGateway.swift; path = Authentication/AuthGateway.swift; sourceTree = "<group>"; };
 		1BA762D81F3297F2003CCB25 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Http/Post.swift; sourceTree = "<group>"; };
-		1BA762DA1F32A2B9003CCB25 /* CallbackProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CallbackProtocol.swift; path = Http/CallbackProtocol.swift; sourceTree = "<group>"; };
 		9A54A84C36AD2C3F9A00820A /* Pods-livevideobroadcasterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-livevideobroadcasterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-livevideobroadcasterUITests/Pods-livevideobroadcasterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_livevideobroadcaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_livevideobroadcasterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,8 +194,8 @@
 				1BA762D41F329057003CCB25 /* http.swift */,
 				1BA762D61F329699003CCB25 /* AuthGateway.swift */,
 				1BA762D81F3297F2003CCB25 /* Post.swift */,
-				1BA762DA1F32A2B9003CCB25 /* CallbackProtocol.swift */,
 				1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */,
+				1B541F511F34001B0071A681 /* ScrollViewVC.swift */,
 			);
 			path = livevideobroadcaster;
 			sourceTree = "<group>";
@@ -308,6 +308,7 @@
 				TargetAttributes = {
 					1BA762A01F328303003CCB25 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 9T8AGZ2K3B;
 						ProvisioningStyle = Automatic;
 					};
 					1BA762B41F328303003CCB25 = {
@@ -537,11 +538,11 @@
 			files = (
 				1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */,
 				1BA762A71F328303003CCB25 /* ViewController.swift in Sources */,
-				1BA762DB1F32A2B9003CCB25 /* CallbackProtocol.swift in Sources */,
 				1BA762A51F328303003CCB25 /* AppDelegate.swift in Sources */,
 				1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */,
 				1BA762D51F329057003CCB25 /* http.swift in Sources */,
 				1BA762D91F3297F2003CCB25 /* Post.swift in Sources */,
+				1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +697,7 @@
 			baseConfigurationReference = C8DA473CFCA0382E7F03026A /* Pods-livevideobroadcaster.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9T8AGZ2K3B;
 				INFOPLIST_FILE = livevideobroadcaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.fanstories.livevideobroadcaster;
@@ -709,6 +711,7 @@
 			baseConfigurationReference = D9EA27945ED849E00D107E46 /* Pods-livevideobroadcaster.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9T8AGZ2K3B;
 				INFOPLIST_FILE = livevideobroadcaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.fanstories.livevideobroadcaster;

@@ -26,7 +26,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rJL-UF-HlZ">
-                                <rect key="frame" x="63" y="442" width="250" height="144"/>
+                                <rect key="frame" x="63" y="423" width="250" height="182"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oU7-Jh-CGP">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="30"/>
@@ -49,9 +49,16 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb8-F8-xHg">
                                         <rect key="frame" x="0.0" y="114" width="250" height="30"/>
-                                        <state key="normal" title="Segue"/>
+                                        <state key="normal" title="Broadcast"/>
                                         <connections>
                                             <segue destination="yh6-ck-srr" kind="show" id="WDr-2E-2v3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovl-m0-RtO">
+                                        <rect key="frame" x="0.0" y="152" width="250" height="30"/>
+                                        <state key="normal" title="Segue"/>
+                                        <connections>
+                                            <segue destination="Nyq-oN-hJu" kind="show" id="T1E-BE-DNQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -76,6 +83,40 @@
             </objects>
             <point key="canvasLocation" x="-66.400000000000006" y="139.880059970015"/>
         </scene>
+        <!--Scroll ViewVC-->
+        <scene sceneID="umw-rG-wlh">
+            <objects>
+                <viewController id="Nyq-oN-hJu" customClass="ScrollViewVC" customModule="livevideobroadcaster" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yQv-UQ-xeo"/>
+                        <viewControllerLayoutGuide type="bottom" id="h8b-2c-xq8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e9k-5j-If6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pd6-kE-OQo">
+                                <rect key="frame" x="0.0" y="497" width="375" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="I1N-cw-agq"/>
+                                    <constraint firstAttribute="width" constant="375" id="hHN-MI-Hzc"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.79043879533678751" blue="0.67223359246202907" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pd6-kE-OQo" firstAttribute="centerY" secondItem="e9k-5j-If6" secondAttribute="centerY" constant="248.5" id="0dm-an-Jh3"/>
+                            <constraint firstItem="pd6-kE-OQo" firstAttribute="centerX" secondItem="e9k-5j-If6" secondAttribute="centerX" id="Ms7-36-Pi4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainScrollView" destination="pd6-kE-OQo" id="kv8-BW-KLN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ISP-Sl-kZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="736.79999999999995" y="-590.55472263868069"/>
+        </scene>
         <!--Live KitVC-->
         <scene sceneID="Chu-nA-NyA">
             <objects>
@@ -85,7 +126,7 @@
                         <viewControllerLayoutGuide type="bottom" id="QQG-Rp-Jns"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Ce-rD-T22">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

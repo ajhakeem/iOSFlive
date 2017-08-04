@@ -79,7 +79,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         .responseJSON { (response2) in
             if let postResponse = response2.result.value {
                 print(postResponse)
-                print("SUCCESS!!!")
             }
             
             else {

@@ -91,7 +91,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     
     // 回调
     func liveSession(_ session: LFLiveSession?, debugInfo: LFLiveDebug?) {
-        print("debugInfo: \(debugInfo?.currentBandwidth)")
+        print("debugInfo: \(String(describing: debugInfo?.currentBandwidth))")
     }
     
     func liveSession(_ session: LFLiveSession?, errorCode: LFLiveSocketErrorCode) {
@@ -102,19 +102,19 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
         print("liveStateDidChange: \(state.rawValue)")
         switch state {
         case LFLiveState.ready:
-            stateLabel.text = "未连接"
+            stateLabel.text = "Not connected"
             break;
         case LFLiveState.pending:
-            stateLabel.text = "连接中"
+            stateLabel.text = "Connecting..."
             break;
         case LFLiveState.start:
-            stateLabel.text = "已连接"
+            stateLabel.text = "Connected!"
             break;
         case LFLiveState.error:
-            stateLabel.text = "连接错误"
+            stateLabel.text = "Connection error"
             break;
         case LFLiveState.stop:
-            stateLabel.text = "未连接"
+            stateLabel.text = "Not connected"
             break;
         default:
             break;
@@ -127,12 +127,13 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     func didTappedStartLiveButton(_ button: UIButton) -> Void {
         startLiveButton.isSelected = !startLiveButton.isSelected;
         if (startLiveButton.isSelected) {
-            startLiveButton.setTitle("结束直播", for: UIControlState())
+            startLiveButton.setTitle("End Live", for: UIControlState())
             let stream = LFLiveStreamInfo()
-            stream.url = "rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153"
+            stream.url = "rtmp://54.201.16.95/live/"
+            //rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153
             session.startLive(stream)
         } else {
-            startLiveButton.setTitle("开始直播", for: UIControlState())
+            startLiveButton.setTitle("Start Live", for: UIControlState())
             session.stopLive()
         }
     }
@@ -173,7 +174,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
         return session!
     }()
     
-    // 视图
+    // View
     var containerView: UIView = {
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         containerView.backgroundColor = UIColor.clear
@@ -181,30 +182,30 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
         return containerView
     }()
     
-    // 状态Label
+    // Status Label
     var stateLabel: UILabel = {
         let stateLabel = UILabel(frame: CGRect(x: 20, y: 20, width: 80, height: 40))
-        stateLabel.text = "未连接"
+        stateLabel.text = "Not connected"
         stateLabel.textColor = UIColor.white
         stateLabel.font = UIFont.systemFont(ofSize: 14)
         return stateLabel
     }()
     
-    // 关闭按钮
+    // Close button
     var closeButton: UIButton = {
         let closeButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 10 - 44, y: 20, width: 44, height: 44))
         closeButton.setImage(UIImage(named: "close_preview"), for: UIControlState())
         return closeButton
     }()
     
-    // 摄像头
+    // Camera
     var cameraButton: UIButton = {
         let cameraButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 54 * 2, y: 20, width: 44, height: 44))
         cameraButton.setImage(UIImage(named: "camra_preview"), for: UIControlState())
         return cameraButton
     }()
     
-    // 摄像头
+    // Beauty
     var beautyButton: UIButton = {
         let beautyButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 54 * 3, y: 20, width: 44, height: 44))
         beautyButton.setImage(UIImage(named: "camra_beauty"), for: UIControlState.selected)
@@ -212,7 +213,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
         return beautyButton
     }()
     
-    // 开始直播按钮
+    // Start Live Button
     var startLiveButton: UIButton = {
         let startLiveButton = UIButton(frame: CGRect(x: 30, y: UIScreen.main.bounds.height - 50, width: UIScreen.main.bounds.width - 10 - 44, height: 44))
         startLiveButton.layer.cornerRadius = 22
