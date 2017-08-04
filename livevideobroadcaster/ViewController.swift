@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -14,10 +15,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     var fieldsValid : Bool = false
     var isSuccessful : Bool = true
+    let authTest = AuthGateway()
+    var loginParams = [String : String]()
+    var loginURL : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
+        emailTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
     }
 
     //MARK: UITextFieldDelegate
@@ -32,10 +38,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginButton(_ sender: UIButton) {
         
         if checkFields() == true {
-            let authTest = AuthGateway()
-            emailTextField.placeholder = authTest.LOGIN_PATH
-            //authTest.runTest(number: 5, completionHandler: <#(Bool) -> Void#>)
-            let postTest = Post()
+            loginParams["email"] = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            loginParams["password"] = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if (loginURL == nil) {
+                    loginURL = authTest.setLoginPath()
+                    login()
+            }
+            
         }
         
         else {
@@ -55,26 +65,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return fieldsValid
     }
 
-}
-
-struct userLoginTask {
-    var userEmail : String
-    var userPassword : String
-    var authGateway = AuthGateway()
-    var loginParams = [String : String]()
-    var response = [String : NSObject]()
-    
-    init(email : String, password : String) {
-        self.userEmail = email
-        self.userPassword = password
-        loginParams["email"] = userEmail
-        loginParams["password"] = userPassword
+    func getRequest() {
+        Alamofire.request("https://httpbin.org/get")
+        .responseJSON { (response) in
+            if let JSON = response.result.value {
+             print(JSON)
+            }
+        }
     }
     
-    func execute() {
-        authGateway.login(params: loginParams)
-        
-    }
+    func login() {
+        Alamofire.request(loginURL!, method: .post, parameters: loginParams, encoding: JSONEncoding.default)
+        .responseJSON { (response2) in
+            if let postResponse = response2.result.value {
+                print(postResponse)
+                print("SUCCESS!!!")
+            }
+            
+            else {
+                print("FAIL")
+            }
+        }
 
+    }
+    
+    
 }
+
 

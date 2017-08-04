@@ -76,18 +76,18 @@
             </objects>
             <point key="canvasLocation" x="-66.400000000000006" y="139.880059970015"/>
         </scene>
-        <!--View Controller-->
+        <!--Live KitVC-->
         <scene sceneID="Chu-nA-NyA">
             <objects>
-                <viewController id="yh6-ck-srr" sceneMemberID="viewController">
+                <viewController id="yh6-ck-srr" customClass="LiveKitVC" customModule="livevideobroadcaster" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oVf-sg-kKJ"/>
                         <viewControllerLayoutGuide type="bottom" id="QQG-Rp-Jns"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Ce-rD-T22">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.3514365646624581" blue="0.72728837215650177" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOV-EU-bfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
