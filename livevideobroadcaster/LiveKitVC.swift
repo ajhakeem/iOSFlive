@@ -45,7 +45,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     func requestAccessForVideo() -> Void {
         let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo);
         switch status  {
-        // 许可对话没有出现，发起授权许可
+        // License dialog has not appeared, and license is initiated
         case AVAuthorizationStatus.notDetermined:
             AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
                 if(granted){
@@ -55,11 +55,11 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
                 }
             })
             break;
-        // 已经开启授权，可继续
+        // Authorized to continue
         case AVAuthorizationStatus.authorized:
             session.running = true;
             break;
-        // 用户明确地拒绝授权，或者相机设备无法访问
+        // User denied authorization, or device audio could not be accessed
         case AVAuthorizationStatus.denied: break
         case AVAuthorizationStatus.restricted:break;
         default:
@@ -70,16 +70,16 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     func requestAccessForAudio() -> Void {
         let status = AVCaptureDevice.authorizationStatus(forMediaType:AVMediaTypeAudio)
         switch status  {
-        // 许可对话没有出现，发起授权许可
+        // License dialog has not appeared, and license is initiated
         case AVAuthorizationStatus.notDetermined:
             AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeAudio, completionHandler: { (granted) in
                 
             })
             break;
-        // 已经开启授权，可继续
+        // Authorized to continue
         case AVAuthorizationStatus.authorized:
             break;
-        // 用户明确地拒绝授权，或者相机设备无法访问
+        // User denied authorization, or camera could not be accessed
         case AVAuthorizationStatus.denied: break
         case AVAuthorizationStatus.restricted:break;
         default:
@@ -89,7 +89,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     
     //MARK: - Callbacks
     
-    // 回调
+    // Callback
     func liveSession(_ session: LFLiveSession?, debugInfo: LFLiveDebug?) {
         print("debugInfo: \(String(describing: debugInfo?.currentBandwidth))")
     }
@@ -112,6 +112,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
             break;
         case LFLiveState.error:
             stateLabel.text = "Connection error"
+            print(LFLiveState.error)
             break;
         case LFLiveState.stop:
             stateLabel.text = "Not connected"
@@ -123,14 +124,15 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     
     //MARK: - Events
     
-    // 开始直播
+    // Start Live
     func didTappedStartLiveButton(_ button: UIButton) -> Void {
         startLiveButton.isSelected = !startLiveButton.isSelected;
         if (startLiveButton.isSelected) {
             startLiveButton.setTitle("End Live", for: UIControlState())
             let stream = LFLiveStreamInfo()
-            stream.url = "rtmp://54.201.16.95/live/"
+            stream.url = "rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153"
             //rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153
+            //rtmp://54.201.16.95/live/
             session.startLive(stream)
         } else {
             startLiveButton.setTitle("Start Live", for: UIControlState())
@@ -138,19 +140,19 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
         }
     }
     
-    // 美颜
+    // Beauty
     func didTappedBeautyButton(_ button: UIButton) -> Void {
         session.beautyFace = !session.beautyFace;
         beautyButton.isSelected = !session.beautyFace
     }
     
-    // 摄像头
+    // Camera
     func didTappedCameraButton(_ button: UIButton) -> Void {
         let devicePositon = session.captureDevicePosition;
         session.captureDevicePosition = (devicePositon == AVCaptureDevicePosition.back) ? AVCaptureDevicePosition.front : AVCaptureDevicePosition.back;
     }
     
-    // 关闭
+    // Close
     func didTappedCloseButton(_ button: UIButton) -> Void  {
         
     }
@@ -184,7 +186,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
     
     // Status Label
     var stateLabel: UILabel = {
-        let stateLabel = UILabel(frame: CGRect(x: 20, y: 20, width: 80, height: 40))
+        let stateLabel = UILabel(frame: CGRect(x: 20, y: 20, width: 150, height: 40))
         stateLabel.text = "Not connected"
         stateLabel.textColor = UIColor.white
         stateLabel.font = UIFont.systemFont(ofSize: 14)

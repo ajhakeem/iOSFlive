@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if checkFields() == true {
             loginParams["email"] = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             loginParams["password"] = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            
+            loginParams["time"] = String(NSDate().timeIntervalSince1970 / 1000)
             if (loginURL == nil) {
                     loginURL = authTest.setLoginPath()
                     login()
@@ -77,13 +77,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func login() {
         Alamofire.request(loginURL!, method: .post, parameters: loginParams, encoding: JSONEncoding.default)
         .responseJSON { (response2) in
-            if let postResponse = response2.result.value {
+            print(response2)
+            /*if let postResponse = response2.result.value {
                 print(postResponse)
             }
             
             else {
                 print("FAIL")
-            }
+            }*/
         }
 
     }
