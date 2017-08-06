@@ -25,6 +25,7 @@
 		1BA762D51F329057003CCB25 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D41F329057003CCB25 /* http.swift */; };
 		1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D61F329699003CCB25 /* AuthGateway.swift */; };
 		1BA762D91F3297F2003CCB25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D81F3297F2003CCB25 /* Post.swift */; };
+		1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56CD1F355682000D4A98 /* Pages.swift */; };
 		B54AD687F8CB8FEDF70EE77C /* Pods_livevideobroadcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */; };
 		BB8C38760736BE6464D9B08C /* Pods_livevideobroadcasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC6E62D616F9C59125C3463 /* Pods_livevideobroadcasterTests.framework */; };
 		E4C13FF24FCE4811A7B8D9A4 /* Pods_livevideobroadcasterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */; };
@@ -88,6 +89,7 @@
 		1BA762D41F329057003CCB25 /* http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = http.swift; path = Http/http.swift; sourceTree = "<group>"; };
 		1BA762D61F329699003CCB25 /* AuthGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthGateway.swift; path = Authentication/AuthGateway.swift; sourceTree = "<group>"; };
 		1BA762D81F3297F2003CCB25 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Http/Post.swift; sourceTree = "<group>"; };
+		1BEE56CD1F355682000D4A98 /* Pages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pages.swift; path = Pages/Pages.swift; sourceTree = "<group>"; };
 		9A54A84C36AD2C3F9A00820A /* Pods-livevideobroadcasterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-livevideobroadcasterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-livevideobroadcasterUITests/Pods-livevideobroadcasterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_livevideobroadcaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_livevideobroadcasterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +198,7 @@
 				1BA762D81F3297F2003CCB25 /* Post.swift */,
 				1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */,
 				1B541F511F34001B0071A681 /* ScrollViewVC.swift */,
+				1BEE56CD1F355682000D4A98 /* Pages.swift */,
 			);
 			path = livevideobroadcaster;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */,
 				1BA762D51F329057003CCB25 /* http.swift in Sources */,
 				1BA762D91F3297F2003CCB25 /* Post.swift in Sources */,
+				1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */,
 				1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

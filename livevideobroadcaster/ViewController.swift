@@ -69,9 +69,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         Alamofire.request(URL(string: "https://testapi.fbfanadnetwork.com/users/login.php")!, method: .post, parameters: parameters, headers: nil)
         .validate()
-        .responseJSON { (response3) -> Void in
-            if (response3 != nil) {
-                print(response3.result.value)
+        .responseJSON { (response) -> Void in
+            if (response != nil) {
+                let statusMessage = response.response?.statusCode
+                let values = response.result.value as! [String: AnyObject]
+                let valueInfo = String(values["status"] as! String)
+                
+                if (valueInfo == "success") {
+                 self.performSegue(withIdentifier: "segueBroadcaster", sender: nil)
+                }
+                
+                else {
+                    print("Invalid credentials")
+                }
             }
 
             else {
@@ -80,7 +90,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-    
     
 }
 

@@ -51,14 +51,14 @@
                                         <rect key="frame" x="0.0" y="114" width="250" height="30"/>
                                         <state key="normal" title="Broadcast"/>
                                         <connections>
-                                            <segue destination="yh6-ck-srr" kind="show" id="WDr-2E-2v3"/>
+                                            <segue destination="yh6-ck-srr" kind="show" identifier="segueBroadcaster" id="WDr-2E-2v3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovl-m0-RtO">
                                         <rect key="frame" x="0.0" y="152" width="250" height="30"/>
                                         <state key="normal" title="Segue"/>
                                         <connections>
-                                            <segue destination="Nyq-oN-hJu" kind="show" id="T1E-BE-DNQ"/>
+                                            <segue destination="Nyq-oN-hJu" kind="show" identifier="segueScrollView" id="T1E-BE-DNQ"/>
                                         </connections>
                                     </button>
                                 </subviews>

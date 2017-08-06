@@ -29,9 +29,11 @@ class ScrollViewVC: UIViewController {
             imageView.frame = CGRect(x: xPos, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
             
             mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat(i + 1)
-            mainScrollView.addSubview(imageView)
-            
+            //mainScrollView.addSubview(imageView)
         }
+        
+        let pageObject = Pages()
+        let _ = pageObject.getPageNames()
         
     }
 
