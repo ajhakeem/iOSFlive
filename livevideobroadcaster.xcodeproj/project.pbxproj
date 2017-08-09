@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */; };
 		1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F511F34001B0071A681 /* ScrollViewVC.swift */; };
+		1B9901911F3A2B81004BFE3C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9901901F3A2B81004BFE3C /* Token.swift */; };
 		1B9B14F61F330F2B0080DC6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F51F330F2B0080DC6B /* UIKit.framework */; };
 		1B9B14F81F330F390080DC6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F71F330F390080DC6B /* Foundation.framework */; };
 		1B9B14FA1F330F430080DC6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F91F330F430080DC6B /* AVFoundation.framework */; };
@@ -24,8 +25,9 @@
 		1BA762C51F328303003CCB25 /* livevideobroadcasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */; };
 		1BA762D51F329057003CCB25 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D41F329057003CCB25 /* http.swift */; };
 		1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D61F329699003CCB25 /* AuthGateway.swift */; };
-		1BA762D91F3297F2003CCB25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D81F3297F2003CCB25 /* Post.swift */; };
+		1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */; };
 		1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56CD1F355682000D4A98 /* Pages.swift */; };
+		1BEE56D11F37D809000D4A98 /* pageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56D01F37D809000D4A98 /* pageItem.swift */; };
 		B54AD687F8CB8FEDF70EE77C /* Pods_livevideobroadcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */; };
 		BB8C38760736BE6464D9B08C /* Pods_livevideobroadcasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC6E62D616F9C59125C3463 /* Pods_livevideobroadcasterTests.framework */; };
 		E4C13FF24FCE4811A7B8D9A4 /* Pods_livevideobroadcasterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */; };
@@ -65,6 +67,7 @@
 /* Begin PBXFileReference section */
 		1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveKitVC.swift; sourceTree = "<group>"; };
 		1B541F511F34001B0071A681 /* ScrollViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewVC.swift; sourceTree = "<group>"; };
+		1B9901901F3A2B81004BFE3C /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = User/Token.swift; sourceTree = "<group>"; };
 		1B9B14E91F330E920080DC6B /* LFLiveKitFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LFLiveKitFramework.h; path = livevideobroadcaster/LFLiveKit/FrameWork/LFLiveKitFramework/LFLiveKitFramework.h; sourceTree = "<group>"; };
 		1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LFLiveKit.xcodeproj; path = livevideobroadcaster/LFLiveKit/FrameWork/LFLiveKit.xcodeproj; sourceTree = "<group>"; };
 		1B9B14F51F330F2B0080DC6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -88,8 +91,9 @@
 		1BA762C61F328303003CCB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BA762D41F329057003CCB25 /* http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = http.swift; path = Http/http.swift; sourceTree = "<group>"; };
 		1BA762D61F329699003CCB25 /* AuthGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthGateway.swift; path = Authentication/AuthGateway.swift; sourceTree = "<group>"; };
-		1BA762D81F3297F2003CCB25 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Http/Post.swift; sourceTree = "<group>"; };
+		1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		1BEE56CD1F355682000D4A98 /* Pages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pages.swift; path = Pages/Pages.swift; sourceTree = "<group>"; };
+		1BEE56D01F37D809000D4A98 /* pageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = pageItem.swift; path = Pages/pageItem.swift; sourceTree = "<group>"; };
 		9A54A84C36AD2C3F9A00820A /* Pods-livevideobroadcasterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-livevideobroadcasterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-livevideobroadcasterUITests/Pods-livevideobroadcasterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_livevideobroadcaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_livevideobroadcasterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,10 +199,12 @@
 				1BA762B01F328303003CCB25 /* Info.plist */,
 				1BA762D41F329057003CCB25 /* http.swift */,
 				1BA762D61F329699003CCB25 /* AuthGateway.swift */,
-				1BA762D81F3297F2003CCB25 /* Post.swift */,
 				1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */,
 				1B541F511F34001B0071A681 /* ScrollViewVC.swift */,
 				1BEE56CD1F355682000D4A98 /* Pages.swift */,
+				1BEE56D01F37D809000D4A98 /* pageItem.swift */,
+				1B9901901F3A2B81004BFE3C /* Token.swift */,
+				1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */,
 			);
 			path = livevideobroadcaster;
 			sourceTree = "<group>";
@@ -539,12 +545,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B9901911F3A2B81004BFE3C /* Token.swift in Sources */,
 				1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */,
+				1BEE56D11F37D809000D4A98 /* pageItem.swift in Sources */,
 				1BA762A71F328303003CCB25 /* ViewController.swift in Sources */,
 				1BA762A51F328303003CCB25 /* AppDelegate.swift in Sources */,
 				1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */,
+				1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */,
 				1BA762D51F329057003CCB25 /* http.swift in Sources */,
-				1BA762D91F3297F2003CCB25 /* Post.swift in Sources */,
 				1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */,
 				1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */,
 			);

@@ -18,13 +18,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let authTest = AuthGateway()
     var loginParams = [String : String]()
     var loginURL : String?
+    var userToken = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
-        
     }
 
     //MARK: UITextFieldDelegate
@@ -36,15 +36,39 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Actions
     
+    @IBAction func broadcastButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segueBroadcast", sender: self)
+    }
+    
     @IBAction func loginButton(_ sender: UIButton) {
         
         if checkFields() == true {
-            login()
+            login(completion : { (loginResult) in
+                if (loginResult == true) {
+                    self.performSegue(withIdentifier: "segueScrollView", sender: self)
+                }
+                
+                else {
+                    print("Invalid credentials")
+                }
+            })
         }
         
         else {
             emailTextField.placeholder = "Fields Invalid"
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "segueScrollView") {
+            let scrollViewVC = segue.destination as! ScrollViewVC
+            scrollViewVC.passedToken += userToken
+        }
+        
+        if (segue.identifier == "segueBroadcast") {
+            _ = segue.destination as! LiveKitVC
+        }
+    
     }
     
     func checkFields() -> Bool {
@@ -59,9 +83,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return fieldsValid
     }
     
-    func login() {
+    func login(completion : @escaping (_ success : Bool) -> ()) {
         
-        let timeString = String(NSDate().timeIntervalSince1970 / 1000)
+        let timeString = String(NSDate().timeIntervalSince1970)
         let parameters = [
             "email" : emailTextField.text!,
             "password" : passwordTextField.text!,
@@ -76,11 +100,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let valueInfo = String(values["status"] as! String)
                 
                 if (valueInfo == "success") {
-                 self.performSegue(withIdentifier: "segueBroadcaster", sender: nil)
+                    let token = Token()
+                    token.setUserToken(userToken: String(values["token"] as! String))
+                    self.userToken = String(values["token"] as! String)
+                    completion(true)
                 }
                 
                 else {
-                    print("Invalid credentials")
+                    completion(false)
                 }
             }
 

@@ -8,49 +8,57 @@
 
 import UIKit
 
-class ScrollViewVC: UIViewController {
+class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    @IBOutlet weak var mainScrollView: UIScrollView!
     
-    var imageArray = [UIImage]()
+    /*@IBOutlet weak var mainScrollView: UIScrollView!
+    var imageArray = [UIImage]()*/
+//    weak var backButton : UIButton!
+    
+    var pageObject = Pages()
+    @IBOutlet weak var collectionViewCell: ImageCollectionViewCell!
+    var passedToken : String = "Bearer "
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var textArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
-        imageArray = [#imageLiteral(resourceName: "flive_splash"), #imageLiteral(resourceName: "flive_logo")]
-        
-        for i in 0 ..< imageArray.count {
-            let imageView = UIImageView()
-            imageView.image = imageArray[i]
-            imageView.contentMode = .scaleAspectFit
-            let xPos = self.view.frame.width * CGFloat(i)
-            imageView.frame = CGRect(x: xPos, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
-            
-            mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat(i + 1)
-            //mainScrollView.addSubview(imageView)
-        }
-        
-        let pageObject = Pages()
-        let _ = pageObject.getPageNames()
+        retrievePages()
         
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return textArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+    
+        cell.textLabel.text = textArray[indexPath.row]
+        return cell
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func retrievePages() {
+        self.textArray = pageObject.getPageNames(authToken: passedToken, completion: { (arrayResponse) in
+            if ((arrayResponse?.count)! > 0) {
+                print("Succeeded in retrieving")
+                self.textArray = arrayResponse! as! [String]
+                self.collectionView.reloadData()
+            }
+            
+            else {
+                print("Failed to retrieve")
+            }
+        })
     }
-    */
-
+    
+    
 }

@@ -51,15 +51,12 @@
                                         <rect key="frame" x="0.0" y="114" width="250" height="30"/>
                                         <state key="normal" title="Broadcast"/>
                                         <connections>
-                                            <segue destination="yh6-ck-srr" kind="show" identifier="segueBroadcaster" id="WDr-2E-2v3"/>
+                                            <action selector="broadcastButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fcK-4n-lwX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovl-m0-RtO">
                                         <rect key="frame" x="0.0" y="152" width="250" height="30"/>
                                         <state key="normal" title="Segue"/>
-                                        <connections>
-                                            <segue destination="Nyq-oN-hJu" kind="show" identifier="segueScrollView" id="T1E-BE-DNQ"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -77,45 +74,73 @@
                     <connections>
                         <outlet property="emailTextField" destination="oU7-Jh-CGP" id="KAg-mQ-ETB"/>
                         <outlet property="passwordTextField" destination="zIx-P2-9SC" id="0jz-Tk-QUJ"/>
+                        <segue destination="cOc-bK-xlA" kind="show" identifier="segueScrollView" id="uHr-YU-VaC"/>
+                        <segue destination="yh6-ck-srr" kind="show" identifier="segueBroadcast" id="lOk-tF-1lg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66.400000000000006" y="139.880059970015"/>
+            <point key="canvasLocation" x="-351" y="-88"/>
         </scene>
         <!--Scroll ViewVC-->
-        <scene sceneID="umw-rG-wlh">
+        <scene sceneID="3Gj-Or-kUp">
             <objects>
-                <viewController id="Nyq-oN-hJu" customClass="ScrollViewVC" customModule="livevideobroadcaster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cOc-bK-xlA" customClass="ScrollViewVC" customModule="livevideobroadcaster" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yQv-UQ-xeo"/>
-                        <viewControllerLayoutGuide type="bottom" id="h8b-2c-xq8"/>
+                        <viewControllerLayoutGuide type="top" id="KUq-en-OqZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="toK-8I-DMH"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e9k-5j-If6">
+                    <view key="view" contentMode="scaleToFill" id="RQx-Z3-f1P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pd6-kE-OQo">
-                                <rect key="frame" x="0.0" y="497" width="375" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="I1N-cw-agq"/>
-                                    <constraint firstAttribute="width" constant="375" id="hHN-MI-Hzc"/>
-                                </constraints>
-                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RvV-2q-qhk">
+                                <rect key="frame" x="0.0" y="542" width="375" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lu1-Fg-sEU">
+                                    <size key="itemSize" width="205" height="120"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="yzj-QC-G97" customClass="ImageCollectionViewCell" customModule="livevideobroadcaster" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="2.5" width="205" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="205" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJ5-Wy-hhh">
+                                                    <rect key="frame" x="20" y="86" width="165" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <connections>
+                                            <outlet property="textLabel" destination="yJ5-Wy-hhh" id="kGT-aV-w4P"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="cOc-bK-xlA" id="gGq-nH-ldR"/>
+                                    <outlet property="delegate" destination="cOc-bK-xlA" id="Yck-TR-a2H"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.79043879533678751" blue="0.67223359246202907" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="pd6-kE-OQo" firstAttribute="centerY" secondItem="e9k-5j-If6" secondAttribute="centerY" constant="248.5" id="0dm-an-Jh3"/>
-                            <constraint firstItem="pd6-kE-OQo" firstAttribute="centerX" secondItem="e9k-5j-If6" secondAttribute="centerX" id="Ms7-36-Pi4"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.0" green="0.69899213439668051" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="mainScrollView" destination="pd6-kE-OQo" id="kv8-BW-KLN"/>
+                        <outlet property="collectionView" destination="RvV-2q-qhk" id="ja7-Ni-juv"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ISP-Sl-kZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wx0-Qs-Cvn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736.79999999999995" y="-590.55472263868069"/>
+            <point key="canvasLocation" x="781.60000000000002" y="-726.38680659670172"/>
         </scene>
         <!--Live KitVC-->
         <scene sceneID="Chu-nA-NyA">
@@ -133,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOV-EU-bfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="140"/>
+            <point key="canvasLocation" x="966" y="148"/>
         </scene>
     </scenes>
     <resources>

@@ -102,7 +102,7 @@ class LiveKitVC: UIViewController, LFLiveSessionDelegate {
         print("liveStateDidChange: \(state.rawValue)")
         switch state {
         case LFLiveState.ready:
-            stateLabel.text = "Not connected"
+            stateLabel.text = "Ready"
             break;
         case LFLiveState.pending:
             stateLabel.text = "Connecting..."
