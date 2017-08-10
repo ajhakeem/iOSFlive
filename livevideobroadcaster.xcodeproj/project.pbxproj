@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */; };
+		1B0C9BD81F3C40E700F1D91E /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C9BD71F3C40E700F1D91E /* Preference.swift */; };
+		1B0C9BDA1F3C410F00F1D91E /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C9BD91F3C410F00F1D91E /* VisualEffect.swift */; };
+		1B10E72D1F3A9174009669F6 /* BroadcasterKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */; };
+		1B10E72F1F3B8590009669F6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E72E1F3B8590009669F6 /* Constants.swift */; };
 		1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F511F34001B0071A681 /* ScrollViewVC.swift */; };
 		1B9901911F3A2B81004BFE3C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9901901F3A2B81004BFE3C /* Token.swift */; };
 		1B9B14F61F330F2B0080DC6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F51F330F2B0080DC6B /* UIKit.framework */; };
@@ -23,8 +26,6 @@
 		1BA762AF1F328303003CCB25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BA762AD1F328303003CCB25 /* LaunchScreen.storyboard */; };
 		1BA762BA1F328303003CCB25 /* livevideobroadcasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762B91F328303003CCB25 /* livevideobroadcasterTests.swift */; };
 		1BA762C51F328303003CCB25 /* livevideobroadcasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */; };
-		1BA762D51F329057003CCB25 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D41F329057003CCB25 /* http.swift */; };
-		1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762D61F329699003CCB25 /* AuthGateway.swift */; };
 		1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */; };
 		1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56CD1F355682000D4A98 /* Pages.swift */; };
 		1BEE56D11F37D809000D4A98 /* pageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56D01F37D809000D4A98 /* pageItem.swift */; };
@@ -34,20 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1B9B14F11F330EFC0080DC6B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84D8B3901D7574D600752B56;
-			remoteInfo = LFLiveKit;
-		};
-		1B9B14F31F330EFC0080DC6B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8495F66B1DB8F14600542124;
-			remoteInfo = LFLiveKitFramework;
-		};
 		1BA762B61F328303003CCB25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BA762991F328303003CCB25 /* Project object */;
@@ -65,11 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveKitVC.swift; sourceTree = "<group>"; };
+		1B0C9BD71F3C40E700F1D91E /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		1B0C9BD91F3C410F00F1D91E /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
+		1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcasterKitViewController.swift; sourceTree = "<group>"; };
+		1B10E72E1F3B8590009669F6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1B541F511F34001B0071A681 /* ScrollViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewVC.swift; sourceTree = "<group>"; };
 		1B9901901F3A2B81004BFE3C /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = User/Token.swift; sourceTree = "<group>"; };
-		1B9B14E91F330E920080DC6B /* LFLiveKitFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LFLiveKitFramework.h; path = livevideobroadcaster/LFLiveKit/FrameWork/LFLiveKitFramework/LFLiveKitFramework.h; sourceTree = "<group>"; };
-		1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LFLiveKit.xcodeproj; path = livevideobroadcaster/LFLiveKit/FrameWork/LFLiveKit.xcodeproj; sourceTree = "<group>"; };
 		1B9B14F51F330F2B0080DC6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1B9B14F71F330F390080DC6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1B9B14F91F330F430080DC6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -89,8 +77,6 @@
 		1BA762C01F328303003CCB25 /* livevideobroadcasterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = livevideobroadcasterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livevideobroadcasterUITests.swift; sourceTree = "<group>"; };
 		1BA762C61F328303003CCB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1BA762D41F329057003CCB25 /* http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = http.swift; path = Http/http.swift; sourceTree = "<group>"; };
-		1BA762D61F329699003CCB25 /* AuthGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthGateway.swift; path = Authentication/AuthGateway.swift; sourceTree = "<group>"; };
 		1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		1BEE56CD1F355682000D4A98 /* Pages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pages.swift; path = Pages/Pages.swift; sourceTree = "<group>"; };
 		1BEE56D01F37D809000D4A98 /* pageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = pageItem.swift; path = Pages/pageItem.swift; sourceTree = "<group>"; };
@@ -148,22 +134,11 @@
 				1B9B14F91F330F430080DC6B /* AVFoundation.framework */,
 				1B9B14F71F330F390080DC6B /* Foundation.framework */,
 				1B9B14F51F330F2B0080DC6B /* UIKit.framework */,
-				1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */,
-				1B9B14E91F330E920080DC6B /* LFLiveKitFramework.h */,
 				A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */,
 				ADC6E62D616F9C59125C3463 /* Pods_livevideobroadcasterTests.framework */,
 				A456E35765FB7773F8343211 /* Pods_livevideobroadcasterUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1B9B14EC1F330EFC0080DC6B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1B9B14F21F330EFC0080DC6B /* LFLiveKit.framework */,
-				1B9B14F41F330EFC0080DC6B /* LFLiveKit.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		1BA762981F328303003CCB25 = {
@@ -197,14 +172,15 @@
 				1BA762AB1F328303003CCB25 /* Assets.xcassets */,
 				1BA762AD1F328303003CCB25 /* LaunchScreen.storyboard */,
 				1BA762B01F328303003CCB25 /* Info.plist */,
-				1BA762D41F329057003CCB25 /* http.swift */,
-				1BA762D61F329699003CCB25 /* AuthGateway.swift */,
-				1B541F4F1F33EDB80071A681 /* LiveKitVC.swift */,
 				1B541F511F34001B0071A681 /* ScrollViewVC.swift */,
 				1BEE56CD1F355682000D4A98 /* Pages.swift */,
 				1BEE56D01F37D809000D4A98 /* pageItem.swift */,
 				1B9901901F3A2B81004BFE3C /* Token.swift */,
 				1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */,
+				1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */,
+				1B10E72E1F3B8590009669F6 /* Constants.swift */,
+				1B0C9BD71F3C40E700F1D91E /* Preference.swift */,
+				1B0C9BD91F3C410F00F1D91E /* VisualEffect.swift */,
 			);
 			path = livevideobroadcaster;
 			sourceTree = "<group>";
@@ -343,12 +319,6 @@
 			mainGroup = 1BA762981F328303003CCB25;
 			productRefGroup = 1BA762A21F328303003CCB25 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 1B9B14EC1F330EFC0080DC6B /* Products */;
-					ProjectRef = 1B9B14EB1F330EFC0080DC6B /* LFLiveKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1BA762A01F328303003CCB25 /* livevideobroadcaster */,
@@ -357,23 +327,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		1B9B14F21F330EFC0080DC6B /* LFLiveKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LFLiveKit.framework;
-			remoteRef = 1B9B14F11F330EFC0080DC6B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1B9B14F41F330EFC0080DC6B /* LFLiveKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LFLiveKit.framework;
-			remoteRef = 1B9B14F31F330EFC0080DC6B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1BA7629F1F328303003CCB25 /* Resources */ = {
@@ -545,15 +498,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0C9BD81F3C40E700F1D91E /* Preference.swift in Sources */,
+				1B10E72D1F3A9174009669F6 /* BroadcasterKitViewController.swift in Sources */,
+				1B10E72F1F3B8590009669F6 /* Constants.swift in Sources */,
 				1B9901911F3A2B81004BFE3C /* Token.swift in Sources */,
-				1BA762D71F329699003CCB25 /* AuthGateway.swift in Sources */,
 				1BEE56D11F37D809000D4A98 /* pageItem.swift in Sources */,
 				1BA762A71F328303003CCB25 /* ViewController.swift in Sources */,
 				1BA762A51F328303003CCB25 /* AppDelegate.swift in Sources */,
-				1B541F501F33EDB80071A681 /* LiveKitVC.swift in Sources */,
 				1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */,
-				1BA762D51F329057003CCB25 /* http.swift in Sources */,
 				1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */,
+				1B0C9BDA1F3C410F00F1D91E /* VisualEffect.swift in Sources */,
 				1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

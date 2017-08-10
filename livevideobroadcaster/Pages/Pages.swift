@@ -15,14 +15,16 @@ class Pages {
         //URL(string: "https://testapi.fbfanadnetwork.com/pages/getAllPages.php")!
         
         var pageNameList = [String]()
-        
+        let const = Constants()
+        let pageUrl = const.ROOT_URL + const.PAGE_BASE_URI + const.GET_PAGES_URI
+    
         let mHeaders1 = [
             "Content-Type" : "application/form-data",
             "X-Client" : "Mobile",
             "Authorization" : authToken
         ]
         
-        Alamofire.request(URL(string: "https://testapi.fbfanadnetwork.com/pages/getAllPages.php")!, method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: mHeaders1)
+        Alamofire.request(URL(string: pageUrl)!, method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: mHeaders1)
         .responseJSON { (response) in
             if (response != nil) {
                 if let responseArray = response.result.value as? NSArray {

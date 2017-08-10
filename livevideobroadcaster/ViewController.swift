@@ -14,17 +14,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var fieldsValid : Bool = false
+    @IBOutlet weak var labelTermsAndPolicies: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
     var isSuccessful : Bool = true
-    let authTest = AuthGateway()
     var loginParams = [String : String]()
-    var loginURL : String?
     var userToken = String()
+    let const = Constants()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
+        
+        initUI()
     }
 
     //MARK: UITextFieldDelegate
@@ -66,9 +69,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         if (segue.identifier == "segueBroadcast") {
-            _ = segue.destination as! LiveKitVC
+            
         }
     
+    }
+    
+    func alertUser() {
+        let alert = UIAlertController(title: "Invalid credentials", message: "Hello", preferredStyle: .alert)
+        present(self, animated: true, completion: nil)
     }
     
     func checkFields() -> Bool {
@@ -91,11 +99,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             "password" : passwordTextField.text!,
             "time" : timeString]
         
-        Alamofire.request(URL(string: "https://testapi.fbfanadnetwork.com/users/login.php")!, method: .post, parameters: parameters, headers: nil)
+        let loginURL = const.ROOT_URL + const.LOGIN_PATH
+        
+        Alamofire.request(URL(string: loginURL)!, method: .post, parameters: parameters, headers: nil)
         .validate()
         .responseJSON { (response) -> Void in
             if (response != nil) {
-                let statusMessage = response.response?.statusCode
+                _ = response.response?.statusCode
                 let values = response.result.value as! [String: AnyObject]
                 let valueInfo = String(values["status"] as! String)
                 
@@ -117,6 +127,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    func initUI() {
+        labelTermsAndPolicies.text = const.TERMS_AND_POLICIES_AGREEMENT
+        let labelText = labelTermsAndPolicies.text!
+        let underlineTermsAndPolicies = NSMutableAttributedString(string : labelText)
+        let termsRange = (labelText as NSString).range(of: "Terms of Use")
+        let policiesRange = (labelText as NSString).range(of: "Privacy Policy")
+        underlineTermsAndPolicies.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: termsRange)
+        underlineTermsAndPolicies.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: termsRange)
+        underlineTermsAndPolicies.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: policiesRange)
+        underlineTermsAndPolicies.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: policiesRange)
+        
+        labelTermsAndPolicies.attributedText = underlineTermsAndPolicies
+        
+        loginButton.layer.cornerRadius = 10
+        loginButton.clipsToBounds = true
+        
+        let termsTapGesture = UITapGestureRecognizer.init(target: self, action: #selector(ViewController.labelTap(sender:)))
+        labelTermsAndPolicies.isUserInteractionEnabled = true
+        labelTermsAndPolicies.addGestureRecognizer(termsTapGesture)
+        
+    }
+    
+    func labelTap(sender: UITapGestureRecognizer) {
+        print("Tapped")
+        
+        if let url = NSURL(string: const.TERMS_OF_USE_URL){
+            UIApplication.shared.openURL(url as URL)
+        }
+    }
+    
     
 }
 

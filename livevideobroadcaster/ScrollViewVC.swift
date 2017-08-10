@@ -18,6 +18,7 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     var pageObject = Pages()
     @IBOutlet weak var collectionViewCell: ImageCollectionViewCell!
     var passedToken : String = "Bearer "
+    var viewcell = ImageCollectionViewCell()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -36,9 +37,30 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-    
+        
+        let cellImage = UIImage(named: "page_select_background")!
+        let highlightedCellImage = UIImage(named: "page_select_background_selected")!
+        
         cell.textLabel.text = textArray[indexPath.row]
+        cell.viewCellImage.image = cellImage
+        cell.viewCellImage.highlightedImage = highlightedCellImage
+        cell.textLabel.highlightedTextColor = UIColor.white
+        cell.viewCellImage.layer.cornerRadius = 15.0
+        cell.viewCellImage.clipsToBounds = true
+        
+        cell.contentView.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.contentView.layer.shadowRadius = 7.5
+        cell.contentView.layer.shadowOpacity = 1.0
+        cell.contentView.clipsToBounds = true
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let currentCell = collectionView.cellForItem(at: indexPath)
+        print(currentCell)
     }
     
     override func didReceiveMemoryWarning() {
