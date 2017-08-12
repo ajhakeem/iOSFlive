@@ -10,6 +10,7 @@ import Foundation
 
 class Token {
     var userToken = String()
+    var bearerUserToken = "Bearer "
     
     func setUserToken(userToken : String) {
         self.userToken = userToken
@@ -17,5 +18,13 @@ class Token {
     
     func getUserToken() -> String {
         return self.userToken
+    }
+    
+    func setBearerUserToken(bearerUserToken : String) {
+        self.bearerUserToken += bearerUserToken
+    }
+    
+    func getBearerUserToken() -> String {
+        return self.bearerUserToken
     }
 }

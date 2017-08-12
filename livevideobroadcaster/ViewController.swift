@@ -20,27 +20,67 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var loginParams = [String : String]()
     var userToken = String()
     let const = Constants()
+    var userSession = UserDefaults()
+    var userSessionExists : Bool = false
+    @IBOutlet weak var heightEmailTF: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
         emailTextField.autocorrectionType = .no
+        passwordTextField.delegate = self
         passwordTextField.autocorrectionType = .no
         
+        
+        //NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillHide:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         initUI()
+        checkUserSessionStatus()
+        let checkConnection = isInternetAvailable()
+        if (checkConnection == true) {
+            print("Connection exists")
+        }
     }
 
     //MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        
         return true
+    }
+    
+//    func keyboardWillShow(notification : NSNotification) {
+//        if let userInfo = notification.userInfo {
+//            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//                heightEmailTF.constant = keyboardSize.height
+//                view.setNeedsLayout()
+//            }
+//        }
+//    }
+//    
+//    func keyboardWillHide(notification : NSNotification) {
+//        heightEmailTF.constant = 0.0
+//        view.setNeedsLayout()
+//    }
+    
+    func checkUserSessionStatus() {
+        if (userSession.string(forKey: "userToken") != nil) {
+            userSessionExists = true
+            _ = userSession.string(forKey: "userToken")
+            print("USER SESSION EXISTS")
+            if (userSessionExists == true) {
+                self.performSegue(withIdentifier: "segueScrollView", sender: self)
+            }
+        }
     }
     
     //MARK: Actions
     
     @IBAction func broadcastButton(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "segueBroadcast", sender: self)
+        self.performSegue(withIdentifier: "segueLiveKit", sender: self)
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
@@ -52,6 +92,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 else {
+                    let alert = alertUser(title: "Invalid Credentials", message: "Please check your email and/or password")
+                    self.present(alert, animated: true, completion: nil)
                     print("Invalid credentials")
                 }
             })
@@ -68,15 +110,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             scrollViewVC.passedToken += userToken
         }
         
-        if (segue.identifier == "segueBroadcast") {
+        if (segue.identifier == "segueLiveKit") {
             
         }
     
-    }
-    
-    func alertUser() {
-        let alert = UIAlertController(title: "Invalid credentials", message: "Hello", preferredStyle: .alert)
-        present(self, animated: true, completion: nil)
     }
     
     func checkFields() -> Bool {
@@ -89,6 +126,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         return fieldsValid
+    }
+    
+    func checkLoginStatus() {
+        
     }
     
     func login(completion : @escaping (_ success : Bool) -> ()) {
@@ -104,22 +145,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
         Alamofire.request(URL(string: loginURL)!, method: .post, parameters: parameters, headers: nil)
         .validate()
         .responseJSON { (response) -> Void in
-            if (response != nil) {
+            if let httpError = response.result.error {
+                print(httpError)
+            }
+            
+            else if (response != nil) {
                 _ = response.response?.statusCode
                 let values = response.result.value as! [String: AnyObject]
                 let valueInfo = String(values["status"] as! String)
                 
                 if (valueInfo == "success") {
                     let token = Token()
-                    token.setUserToken(userToken: String(values["token"] as! String))
+                    let tokenString = String(values["token"] as! String)
+                    token.setUserToken(userToken: tokenString!)
+                    token.setBearerUserToken(bearerUserToken: tokenString!)
                     self.userToken = String(values["token"] as! String)
+                    self.userSession = UserDefaults.standard
+                    self.userSession.set(self.userToken, forKey: "userToken")
+//                    print(self.userSession.string(forKey: "userToken"))
                     completion(true)
                 }
-                
+                    
                 else {
                     completion(false)
                 }
             }
+
 
             else {
                 print("Sign-in error")

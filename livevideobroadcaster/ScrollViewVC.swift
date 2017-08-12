@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -19,16 +20,67 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     @IBOutlet weak var collectionViewCell: ImageCollectionViewCell!
     var passedToken : String = "Bearer "
     var viewcell = ImageCollectionViewCell()
-    
+    let const = Constants()
+    var token = Token()
+    var viewCell = ImageCollectionViewCell()
+    var currentCell : String = ""
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     var textArray = [String]()
+    var selectedPageDetails = [String : Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         retrievePages()
+    }
+    
+    @IBAction func closeButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func shareButton(_ sender: Any) {
+        shareLink(shareCompletion: { (response) in
+            if (response == true) {
+                print("Successfully shared!")
+            }
+            
+            else {
+                print("Could not share now!")
+            }
+        })
+    }
+    
+    func shareLink(shareCompletion : @escaping (_ success : Bool) -> ()) {
+        var headers = const.mHeaders
+        headers["Authorization"] = passedToken
+        let messageParams = [
+            "194300524348319" : "page_id",
+            "http://hoc.fanadnetwork.com/live" : "link",
+            "This is a test" : "message"]
         
+        //        "194300524348319" : "page_id",
+        //        "http://hoc.fanadnetwork.com/live" : "link",
+        //        "This is a test" : "message"
+        
+        let reqUrl = const.ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
+
+        Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: JSONEncoding.prettyPrinted, headers: headers)
+            .responseJSON { (response) in
+                    if let responseArray = response.result.value as? NSArray {
+                        print(responseArray)
+                        for ind in 0...responseArray.count-1 {
+                            let arrayObject = responseArray[ind] as! [String : AnyObject]
+                            print(arrayObject)
+                        }
+                        shareCompletion(true)
+                    }
+                
+                    else {
+                        shareCompletion(false)
+                }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -59,8 +111,21 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let currentCell = collectionView.cellForItem(at: indexPath)
-        print(currentCell)
+        let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell
+        self.currentCell = (cell?.textLabel.text!)!
+//        print(self.currentCell)
+        
+        pageObject.getPageDetails(authToken: passedToken, pageName: currentCell, completion: { (detailPage) in
+            if (detailPage != nil) {
+                print("Succeeded in retrieving detail page")
+                self.selectedPageDetails = detailPage!
+                self.goLive()
+            }
+                
+            else {
+                print("Detail Page failed")
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,6 +145,18 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
                 print("Failed to retrieve")
             }
         })
+    }
+    
+    func goLive() {
+        if (selectedPageDetails.count > 0) {
+            let selectedPageBlogUrl = selectedPageDetails["blog_url"] as! String
+            let selectedPageVerified = selectedPageDetails["verified"] as! String
+            if ((selectedPageVerified == "1") && (selectedPageBlogUrl != nil) && (!selectedPageBlogUrl.isEmpty)) {
+                print("PAGE VERIFIED, BLOG URL NOT NIL, BLOG URL")
+                
+                //FILL IN HERE 
+            }
+        }
     }
     
     
