@@ -13,6 +13,7 @@
 		1B0C9BE01F3CF99E00F1D91E /* AlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C9BDF1F3CF99E00F1D91E /* AlertDialog.swift */; };
 		1B10E72D1F3A9174009669F6 /* BroadcasterKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */; };
 		1B10E72F1F3B8590009669F6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E72E1F3B8590009669F6 /* Constants.swift */; };
+		1B2113F71F3F9E71001E6A96 /* LiveGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2113F61F3F9E71001E6A96 /* LiveGateway.swift */; };
 		1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F511F34001B0071A681 /* ScrollViewVC.swift */; };
 		1B9901911F3A2B81004BFE3C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9901901F3A2B81004BFE3C /* Token.swift */; };
 		1B9B14F61F330F2B0080DC6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B14F51F330F2B0080DC6B /* UIKit.framework */; };
@@ -60,6 +61,7 @@
 		1B0C9BDF1F3CF99E00F1D91E /* AlertDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertDialog.swift; sourceTree = "<group>"; };
 		1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcasterKitViewController.swift; sourceTree = "<group>"; };
 		1B10E72E1F3B8590009669F6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1B2113F61F3F9E71001E6A96 /* LiveGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveGateway.swift; sourceTree = "<group>"; };
 		1B541F511F34001B0071A681 /* ScrollViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewVC.swift; sourceTree = "<group>"; };
 		1B9901901F3A2B81004BFE3C /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = User/Token.swift; sourceTree = "<group>"; };
 		1B9B14F51F330F2B0080DC6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -178,6 +180,7 @@
 				1BA762B01F328303003CCB25 /* Info.plist */,
 				1B541F511F34001B0071A681 /* ScrollViewVC.swift */,
 				1BEE56CD1F355682000D4A98 /* Pages.swift */,
+				1B2113F61F3F9E71001E6A96 /* LiveGateway.swift */,
 				1BEE56D01F37D809000D4A98 /* pageItem.swift */,
 				1B9901901F3A2B81004BFE3C /* Token.swift */,
 				1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */,
@@ -514,6 +517,7 @@
 				1B0C9BDE1F3CF8AD00F1D91E /* CheckConnection.swift in Sources */,
 				1BA762A51F328303003CCB25 /* AppDelegate.swift in Sources */,
 				1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */,
+				1B2113F71F3F9E71001E6A96 /* LiveGateway.swift in Sources */,
 				1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */,
 				1B0C9BDA1F3C410F00F1D91E /* VisualEffect.swift in Sources */,
 				1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */,

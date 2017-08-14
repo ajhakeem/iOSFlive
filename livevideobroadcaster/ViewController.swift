@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var userSession = UserDefaults()
     var userSessionExists : Bool = false
     @IBOutlet weak var heightEmailTF: NSLayoutConstraint!
+    @IBOutlet weak var botConstraintLoginStack: NSLayoutConstraint!
+    var keyboardHeight = CGFloat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +34,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.autocorrectionType = .no
         
         
-        //NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillHide:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: "keyboardWillShow:", name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: "keyboardWillHide:", name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         initUI()
         checkUserSessionStatus()
@@ -51,20 +53,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
-//    func keyboardWillShow(notification : NSNotification) {
-//        if let userInfo = notification.userInfo {
-//            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//                heightEmailTF.constant = keyboardSize.height
-//                view.setNeedsLayout()
-//            }
-//        }
-//    }
-//    
-//    func keyboardWillHide(notification : NSNotification) {
-//        heightEmailTF.constant = 0.0
-//        view.setNeedsLayout()
-//    }
     
     func checkUserSessionStatus() {
         if (userSession.string(forKey: "userToken") != nil) {
@@ -209,7 +197,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            botConstraintLoginStack.constant = keyboardHeight
+        }
+    }
     
+    func keyboardWillHide(_ notification: Notification) {
+        if let keyboardFrame : NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            botConstraintLoginStack.constant = 188
+        }
+    }
 }
 
 

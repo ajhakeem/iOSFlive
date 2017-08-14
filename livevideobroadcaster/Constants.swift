@@ -10,6 +10,7 @@ import Foundation
 
 struct Constants {
     let ROOT_URL = "https://testapi.fbfanadnetwork.com"
+    let PROD_ROOT_URL = "https://fbfanads.com/fanads-backend"
     let LOGIN_PATH = "/users/login.php"
     let PAGE_BASE_URI = "/pages"
     let BASE_URI = "/pages/live"

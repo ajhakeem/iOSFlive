@@ -71,6 +71,7 @@ class Pages {
                         if (arrName == pageName) {
                             var keyExists : Bool = true
                             if (keyExists == true) {
+//                                print(arrayObject)
                                 completion(arrayObject)
                             }
                         }

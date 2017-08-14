@@ -17,15 +17,28 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
 //    weak var backButton : UIButton!
     
     var pageObject = Pages()
+    var liveGateway = LiveGateway()
+    
     @IBOutlet weak var collectionViewCell: ImageCollectionViewCell!
+
+    @IBOutlet weak var widthConstraintShareMessage: NSLayoutConstraint!
+    @IBOutlet weak var botConstraintRecordButton: NSLayoutConstraint!
+    @IBOutlet weak var botConstraintBlogSelect: NSLayoutConstraint!
+    @IBOutlet weak var StackBlogSelect: UIStackView!
+    var isPageSelectExpanded : Bool = true
+    var isShareToFBExpanded : Bool = false
     var passedToken : String = "Bearer "
     var viewcell = ImageCollectionViewCell()
     let const = Constants()
     var token = Token()
     var viewCell = ImageCollectionViewCell()
     var currentCell : String = ""
+    var selectedPageBlogUrl = ""
+    var selectedPageVerified = ""
+    var selectedPageBlogId = ""
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var StackScrollView: UIStackView!
     
     var textArray = [String]()
     var selectedPageDetails = [String : Any]()
@@ -40,6 +53,17 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func toggleStackView(_ sender: Any) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.botConstraintBlogSelect.constant = self.isPageSelectExpanded ? -200 : 0
+            self.botConstraintRecordButton.constant = self.isPageSelectExpanded ? 30 : 194
+            self.view.layoutIfNeeded()
+        }, completion: { (success) in
+            self.isPageSelectExpanded = self.isPageSelectExpanded ? false : true
+        })
+    }
+    
     @IBAction func shareButton(_ sender: Any) {
         shareLink(shareCompletion: { (response) in
             if (response == true) {
@@ -52,6 +76,15 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
         })
     }
     
+    @IBAction func shareToFBButton(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.widthConstraintShareMessage.constant = self.isShareToFBExpanded ? 280 : 0
+            self.view.layoutIfNeeded()
+        }, completion: { (success) in
+            self.isShareToFBExpanded = self.isShareToFBExpanded ? false : true
+        })
+    }
+
     func shareLink(shareCompletion : @escaping (_ success : Bool) -> ()) {
         var headers = const.mHeaders
         headers["Authorization"] = passedToken
@@ -64,7 +97,7 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
         //        "http://hoc.fanadnetwork.com/live" : "link",
         //        "This is a test" : "message"
         
-        let reqUrl = const.ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
+        let reqUrl = const.PROD_ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
 
         Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .responseJSON { (response) in
@@ -119,7 +152,6 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
             if (detailPage != nil) {
                 print("Succeeded in retrieving detail page")
                 self.selectedPageDetails = detailPage!
-                self.goLive()
             }
                 
             else {
@@ -131,6 +163,10 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func recordButton(_ sender: UIButton) {
+        self.goLive()
     }
     
     func retrievePages() {
@@ -149,15 +185,17 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func goLive() {
         if (selectedPageDetails.count > 0) {
-            let selectedPageBlogUrl = selectedPageDetails["blog_url"] as! String
-            let selectedPageVerified = selectedPageDetails["verified"] as! String
-            if ((selectedPageVerified == "1") && (selectedPageBlogUrl != nil) && (!selectedPageBlogUrl.isEmpty)) {
+            self.selectedPageBlogUrl = selectedPageDetails["blog_url"] as! String
+            self.selectedPageVerified = selectedPageDetails["verified"] as! String
+            self.selectedPageBlogId = selectedPageDetails["page_id"] as! String
+            
+            if ((self.selectedPageVerified == "1") && (self.selectedPageBlogUrl != nil) && (!self.selectedPageBlogUrl.isEmpty)) {
                 print("PAGE VERIFIED, BLOG URL NOT NIL, BLOG URL")
-                
                 //FILL IN HERE 
             }
+            
+            liveGateway.getStreamKey(authToken: passedToken, selectedPageId: selectedPageBlogId)
         }
     }
-    
     
 }
