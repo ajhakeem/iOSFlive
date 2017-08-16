@@ -150,7 +150,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.userToken = String(values["token"] as! String)
                     self.userSession = UserDefaults.standard
                     self.userSession.set(self.userToken, forKey: "userToken")
-//                    print(self.userSession.string(forKey: "userToken"))
+                    print(timeString)
                     completion(true)
                 }
                     

@@ -25,6 +25,9 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     @IBOutlet weak var botConstraintRecordButton: NSLayoutConstraint!
     @IBOutlet weak var botConstraintBlogSelect: NSLayoutConstraint!
     @IBOutlet weak var StackBlogSelect: UIStackView!
+    @IBOutlet weak var shareContentStack: UIStackView!
+    
+    
     var isPageSelectExpanded : Bool = true
     var isShareToFBExpanded : Bool = false
     var passedToken : String = "Bearer "
@@ -36,6 +39,7 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     var selectedPageBlogUrl = ""
     var selectedPageVerified = ""
     var selectedPageBlogId = ""
+    var retrievedStreamKey = ""
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var StackScrollView: UIStackView!
@@ -45,6 +49,8 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        shareContentStack.isHidden = true
         
         retrievePages()
     }
@@ -78,7 +84,8 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
     
     @IBAction func shareToFBButton(_ sender: UIButton) {
         UIView.animate(withDuration: 0.25, animations: {
-            self.widthConstraintShareMessage.constant = self.isShareToFBExpanded ? 280 : 0
+            //self.widthConstraintShareMessage.constant = self.isShareToFBExpanded ? 280 : 0
+            //self.shareContentStack.isHidden = self.isShareToFBExpanded ? false : true
             self.view.layoutIfNeeded()
         }, completion: { (success) in
             self.isShareToFBExpanded = self.isShareToFBExpanded ? false : true
@@ -97,9 +104,9 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
         //        "http://hoc.fanadnetwork.com/live" : "link",
         //        "This is a test" : "message"
         
-        let reqUrl = const.PROD_ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
+        let reqUrl = const.ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
 
-        Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: URLEncoding.default, headers: headers)
             .responseJSON { (response) in
                     if let responseArray = response.result.value as? NSArray {
                         print(responseArray)
@@ -177,7 +184,7 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
                 self.collectionView.reloadData()
             }
             
-            else {
+            if (arrayResponse == nil) {
                 print("Failed to retrieve")
             }
         })
@@ -191,10 +198,22 @@ class ScrollViewVC : UIViewController, UICollectionViewDelegate, UICollectionVie
             
             if ((self.selectedPageVerified == "1") && (self.selectedPageBlogUrl != nil) && (!self.selectedPageBlogUrl.isEmpty)) {
                 print("PAGE VERIFIED, BLOG URL NOT NIL, BLOG URL")
-                //FILL IN HERE 
+                liveGateway.getStreamKey(authToken: passedToken, selectedPageId: selectedPageBlogId, completion: { (retrievedStream) in
+                    if (retrievedStream != nil) {
+                        self.retrievedStreamKey = retrievedStream!
+                        print("Successfully retrieved stream key!")
+                        print(self.retrievedStreamKey)
+                    }
+                        
+                    else {
+                        print("Failed to retrieve stream key")
+                    }
+                })
             }
             
-            liveGateway.getStreamKey(authToken: passedToken, selectedPageId: selectedPageBlogId)
+            else {
+                print("This page is not verified")
+            }
         }
     }
     
