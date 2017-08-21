@@ -15,7 +15,7 @@ class LiveGateway {
     var reqUrl : String = ""
     
     init() {
-        self.reqUrl = const.ROOT_URL + const.BASE_URI + const.GET_STREAM_KEY_URI
+        self.reqUrl = const.PROD_ROOT_URL + const.BASE_URI + const.GET_STREAM_KEY_URI
     }
     
 //    ["page_id":selectedPageId]

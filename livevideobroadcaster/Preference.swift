@@ -11,7 +11,8 @@ import Foundation
 struct Preference {
     static var defaultInstance:Preference = Preference()
     
-    var uri:String? = "rtmp://54.201.16.95/live/194300524348319_5993f8b344df4"
+    var uri:String? = "rtmp://54.201.16.95:1935/live_test/"
 //    rtmp://test:test@192.168.11.19/live
+//    rtmp://54.201.16.95/live/
     var streamName:String? = "live"
 }

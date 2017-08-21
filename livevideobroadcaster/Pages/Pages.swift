@@ -15,14 +15,13 @@ class Pages {
     var pageUrl : String = ""
     
     init() {
-        self.pageUrl = const.ROOT_URL + const.PAGE_BASE_URI + const.GET_PAGES_URI
+        self.pageUrl = const.PROD_ROOT_URL + const.PAGE_BASE_URI + const.GET_PAGES_URI
     }
     
     func getPageNames(authToken : String, completion : @escaping ((Array<AnyObject>?) -> ())) -> [String] {
         //URL(string: "https://testapi.fbfanadnetwork.com/pages/getAllPages.php")!
         
         var pageNameList = [String]()
-        let pageUrl = const.PROD_ROOT_URL + const.PAGE_BASE_URI + const.GET_PAGES_URI
     
         let mHeaders1 = [
             "Content-Type" : "application/form-data",
@@ -36,8 +35,10 @@ class Pages {
                 if let responseArray = response.result.value as? NSArray {
                     if (responseArray.count > 1) {
                         for index in 0...responseArray.count-1 {
-                            let arrayObject = responseArray[index] as! [String : AnyObject]
-                            pageNameList.append(arrayObject["name"] as! String)
+                            var arrayObject = responseArray[index] as! [String : AnyObject]
+                            if ((arrayObject["verified"] as? String) == "1") {
+                             pageNameList.append(arrayObject["name"] as! String)   
+                            }
                         } //end foreach
                         completion(pageNameList as Array<AnyObject>)
                     }

@@ -11,8 +11,8 @@
 		1B0C9BDA1F3C410F00F1D91E /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C9BD91F3C410F00F1D91E /* VisualEffect.swift */; };
 		1B0C9BDE1F3CF8AD00F1D91E /* CheckConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C9BDD1F3CF8AD00F1D91E /* CheckConnection.swift */; };
 		1B0C9BE01F3CF99E00F1D91E /* AlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C9BDF1F3CF99E00F1D91E /* AlertDialog.swift */; };
-		1B10E72D1F3A9174009669F6 /* BroadcasterKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */; };
 		1B10E72F1F3B8590009669F6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E72E1F3B8590009669F6 /* Constants.swift */; };
+		1B1B07ED1F4B7AAF00B23186 /* viewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B07EC1F4B7AAF00B23186 /* viewCell.swift */; };
 		1B2113F71F3F9E71001E6A96 /* LiveGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2113F61F3F9E71001E6A96 /* LiveGateway.swift */; };
 		1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B541F511F34001B0071A681 /* ScrollViewVC.swift */; };
 		1B9901911F3A2B81004BFE3C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9901901F3A2B81004BFE3C /* Token.swift */; };
@@ -29,7 +29,8 @@
 		1BA762AF1F328303003CCB25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BA762AD1F328303003CCB25 /* LaunchScreen.storyboard */; };
 		1BA762BA1F328303003CCB25 /* livevideobroadcasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762B91F328303003CCB25 /* livevideobroadcasterTests.swift */; };
 		1BA762C51F328303003CCB25 /* livevideobroadcasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */; };
-		1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */; };
+		1BD3C5E31F44EC0D00738FC8 /* LFKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD3C5E21F44EC0D00738FC8 /* LFKit.swift */; };
+		1BD3C5E51F44ED4400738FC8 /* LFLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3C5E41F44ED4400738FC8 /* LFLiveKit.framework */; };
 		1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56CD1F355682000D4A98 /* Pages.swift */; };
 		1BEE56D11F37D809000D4A98 /* pageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE56D01F37D809000D4A98 /* pageItem.swift */; };
 		B54AD687F8CB8FEDF70EE77C /* Pods_livevideobroadcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24463CB0270BE9A4D1E6E4A /* Pods_livevideobroadcaster.framework */; };
@@ -59,8 +60,8 @@
 		1B0C9BD91F3C410F00F1D91E /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		1B0C9BDD1F3CF8AD00F1D91E /* CheckConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckConnection.swift; sourceTree = "<group>"; };
 		1B0C9BDF1F3CF99E00F1D91E /* AlertDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertDialog.swift; sourceTree = "<group>"; };
-		1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcasterKitViewController.swift; sourceTree = "<group>"; };
 		1B10E72E1F3B8590009669F6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1B1B07EC1F4B7AAF00B23186 /* viewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewCell.swift; sourceTree = "<group>"; };
 		1B2113F61F3F9E71001E6A96 /* LiveGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveGateway.swift; sourceTree = "<group>"; };
 		1B541F511F34001B0071A681 /* ScrollViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewVC.swift; sourceTree = "<group>"; };
 		1B9901901F3A2B81004BFE3C /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = User/Token.swift; sourceTree = "<group>"; };
@@ -83,7 +84,8 @@
 		1BA762C01F328303003CCB25 /* livevideobroadcasterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = livevideobroadcasterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA762C41F328303003CCB25 /* livevideobroadcasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livevideobroadcasterUITests.swift; sourceTree = "<group>"; };
 		1BA762C61F328303003CCB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		1BD3C5E21F44EC0D00738FC8 /* LFKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFKit.swift; sourceTree = "<group>"; };
+		1BD3C5E41F44ED4400738FC8 /* LFLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LFLiveKit.framework; path = "Pods/../build/Debug-iphoneos/LFLiveKit/LFLiveKit.framework"; sourceTree = "<group>"; };
 		1BEE56CD1F355682000D4A98 /* Pages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pages.swift; path = Pages/Pages.swift; sourceTree = "<group>"; };
 		1BEE56D01F37D809000D4A98 /* pageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = pageItem.swift; path = Pages/pageItem.swift; sourceTree = "<group>"; };
 		9A54A84C36AD2C3F9A00820A /* Pods-livevideobroadcasterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-livevideobroadcasterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-livevideobroadcasterUITests/Pods-livevideobroadcasterUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BD3C5E51F44ED4400738FC8 /* LFLiveKit.framework in Frameworks */,
 				1B9B15001F330F620080DC6B /* libz.tbd in Frameworks */,
 				1B9B14FE1F330F520080DC6B /* AudioToolbox.framework in Frameworks */,
 				1B9B14FC1F330F4A0080DC6B /* VideoToolbox.framework in Frameworks */,
@@ -134,6 +137,7 @@
 		1B9B14E81F330E920080DC6B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1BD3C5E41F44ED4400738FC8 /* LFLiveKit.framework */,
 				1B9B14FF1F330F620080DC6B /* libz.tbd */,
 				1B9B14FD1F330F520080DC6B /* AudioToolbox.framework */,
 				1B9B14FB1F330F4A0080DC6B /* VideoToolbox.framework */,
@@ -183,13 +187,13 @@
 				1B2113F61F3F9E71001E6A96 /* LiveGateway.swift */,
 				1BEE56D01F37D809000D4A98 /* pageItem.swift */,
 				1B9901901F3A2B81004BFE3C /* Token.swift */,
-				1BDA6B811F3A542C006314CB /* ImageCollectionViewCell.swift */,
-				1B10E72C1F3A9174009669F6 /* BroadcasterKitViewController.swift */,
 				1B10E72E1F3B8590009669F6 /* Constants.swift */,
 				1B0C9BD71F3C40E700F1D91E /* Preference.swift */,
 				1B0C9BD91F3C410F00F1D91E /* VisualEffect.swift */,
 				1B0C9BDD1F3CF8AD00F1D91E /* CheckConnection.swift */,
 				1B0C9BDF1F3CF99E00F1D91E /* AlertDialog.swift */,
+				1BD3C5E21F44EC0D00738FC8 /* LFKit.swift */,
+				1B1B07EC1F4B7AAF00B23186 /* viewCell.swift */,
 			);
 			path = livevideobroadcaster;
 			sourceTree = "<group>";
@@ -303,6 +307,7 @@
 					1BA762A01F328303003CCB25 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 9T8AGZ2K3B;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1BA762B41F328303003CCB25 = {
@@ -422,12 +427,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-livevideobroadcaster/Pods-livevideobroadcaster-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HaishinKit/HaishinKit.framework",
+				"${BUILT_PRODUCTS_DIR}/LFLiveKit/LFLiveKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Logboard/Logboard.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HaishinKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLiveKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Logboard.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,19 +531,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0C9BD81F3C40E700F1D91E /* Preference.swift in Sources */,
-				1B10E72D1F3A9174009669F6 /* BroadcasterKitViewController.swift in Sources */,
 				1B10E72F1F3B8590009669F6 /* Constants.swift in Sources */,
 				1B9901911F3A2B81004BFE3C /* Token.swift in Sources */,
 				1BEE56D11F37D809000D4A98 /* pageItem.swift in Sources */,
 				1BA762A71F328303003CCB25 /* ViewController.swift in Sources */,
 				1B0C9BE01F3CF99E00F1D91E /* AlertDialog.swift in Sources */,
+				1BD3C5E31F44EC0D00738FC8 /* LFKit.swift in Sources */,
 				1B0C9BDE1F3CF8AD00F1D91E /* CheckConnection.swift in Sources */,
 				1BA762A51F328303003CCB25 /* AppDelegate.swift in Sources */,
-				1BDA6B821F3A542C006314CB /* ImageCollectionViewCell.swift in Sources */,
 				1B2113F71F3F9E71001E6A96 /* LiveGateway.swift in Sources */,
 				1BEE56CE1F355682000D4A98 /* Pages.swift in Sources */,
 				1B0C9BDA1F3C410F00F1D91E /* VisualEffect.swift in Sources */,
 				1B541F521F34001B0071A681 /* ScrollViewVC.swift in Sources */,
+				1B1B07ED1F4B7AAF00B23186 /* viewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,11 +698,18 @@
 			baseConfigurationReference = C8DA473CFCA0382E7F03026A /* Pods-livevideobroadcaster.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9T8AGZ2K3B;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/LFLiveKit",
+				);
 				INFOPLIST_FILE = livevideobroadcaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.fanstories.livevideobroadcaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "livevideobroadcaster/livevideobroadcaster-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -705,11 +719,17 @@
 			baseConfigurationReference = D9EA27945ED849E00D107E46 /* Pods-livevideobroadcaster.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9T8AGZ2K3B;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/LFLiveKit",
+				);
 				INFOPLIST_FILE = livevideobroadcaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.fanstories.livevideobroadcaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "livevideobroadcaster/livevideobroadcaster-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

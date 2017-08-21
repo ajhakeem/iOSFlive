@@ -25,6 +25,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var heightEmailTF: NSLayoutConstraint!
     @IBOutlet weak var botConstraintLoginStack: NSLayoutConstraint!
     var keyboardHeight = CGFloat()
+    @IBOutlet weak var centXConstraintUIStackView: NSLayoutConstraint!
+    @IBOutlet weak var botConstraintUIStackView: NSLayoutConstraint!
+    @IBOutlet weak var widthUIStackView: NSLayoutConstraint!
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +45,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         initUI()
         checkUserSessionStatus()
-        let checkConnection = isInternetAvailable()
-        if (checkConnection == true) {
-            print("Connection exists")
-        }
     }
 
     //MARK: UITextFieldDelegate
@@ -67,39 +69,51 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Actions
     
-    @IBAction func broadcastButton(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "segueLiveKit", sender: self)
-    }
-    
-    @IBAction func loginButton(_ sender: UIButton) {
+    func checkConnection() -> Bool {
+        let checkConnection = isInternetAvailable()
         
-        if checkFields() == true {
-            login(completion : { (loginResult) in
-                if (loginResult == true) {
-                    self.performSegue(withIdentifier: "segueScrollView", sender: self)
-                }
-                
-                else {
-                    let alert = alertUser(title: "Invalid Credentials", message: "Please check your email and/or password")
-                    self.present(alert, animated: true, completion: nil)
-                    print("Invalid credentials")
-                }
-            })
+        if (checkConnection == true) {
+            return true
         }
         
         else {
-            emailTextField.placeholder = "Fields Invalid"
+            return false
         }
     }
+    
+    @IBAction func loginButton(_ sender: UIButton) {
+        if (!checkConnection()) {
+            let alert = alertUser(title: "Check connection", message: "Please check your internet connection and try again")
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        else {
+            if checkFields() == true {
+                login(completion : { (loginResult) in
+                    if (loginResult == true) {
+                        self.performSegue(withIdentifier: "segueScrollView", sender: self)
+                    }
+                        
+                    else {
+                        let alert = alertUser(title: "Invalid Credentials", message: "Please check your email and/or password")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
+            }
+                
+            else {
+                let alert = alertUser(title: "Fields empty", message: "Please fill out the required fields")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+        
+}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "segueScrollView") {
             let scrollViewVC = segue.destination as! ScrollViewVC
             scrollViewVC.passedToken += userToken
-        }
-        
-        if (segue.identifier == "segueLiveKit") {
-            
         }
     
     }
@@ -128,7 +142,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             "password" : passwordTextField.text!,
             "time" : timeString]
         
-        let loginURL = const.ROOT_URL + const.LOGIN_PATH
+        let loginURL = const.PROD_ROOT_URL + const.LOGIN_PATH
         
         Alamofire.request(URL(string: loginURL)!, method: .post, parameters: parameters, headers: nil)
         .validate()
@@ -150,7 +164,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.userToken = String(values["token"] as! String)
                     self.userSession = UserDefaults.standard
                     self.userSession.set(self.userToken, forKey: "userToken")
-                    print(timeString)
                     completion(true)
                 }
                     
@@ -187,6 +200,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         labelTermsAndPolicies.isUserInteractionEnabled = true
         labelTermsAndPolicies.addGestureRecognizer(termsTapGesture)
         
+        self.centXConstraintUIStackView.constant = 0
+        
     }
     
     func labelTap(sender: UITapGestureRecognizer) {
@@ -201,14 +216,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
-            botConstraintLoginStack.constant = keyboardHeight
+//            botConstraintLoginStack.constant = 200
         }
     }
     
     func keyboardWillHide(_ notification: Notification) {
         if let keyboardFrame : NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            botConstraintLoginStack.constant = 188
+            keyboardHeight = keyboardRectangle.height
+//            botConstraintLoginStack.constant = 0
         }
     }
 }
