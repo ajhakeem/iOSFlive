@@ -58,14 +58,20 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wge-31-uVE" userLabel="Buttons">
                                         <rect key="frame" x="0.0" y="73.666666666666629" width="310.66666666666669" height="110.33333333333331"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFa-kK-JBG">
-                                                <rect key="frame" x="0.0" y="0.0" width="310.66666666666669" height="71.666666666666686"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms Text" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFa-kK-JBG" userLabel="Label Terms">
+                                                <rect key="frame" x="0.0" y="0.0" width="310.66666666666669" height="33.333333333333314"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Policies Text" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-NE-Bs3" userLabel="Label Policies">
+                                                <rect key="frame" x="0.0" y="33.333333333333314" width="310.66666666666669" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gA-hC-OTu">
-                                                <rect key="frame" x="0.0" y="71.666666666666686" width="310.66666666666669" height="38.666666666666629"/>
+                                                <rect key="frame" x="0.0" y="66.333333333333314" width="310.66666666666669" height="44"/>
                                                 <state key="normal" title="Login" backgroundImage="page_select_background_selected">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -75,8 +81,9 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="EFa-kK-JBG" firstAttribute="height" secondItem="wge-31-uVE" secondAttribute="height" multiplier="0.65" id="Vj8-dm-cV9"/>
-                                            <constraint firstItem="4gA-hC-OTu" firstAttribute="height" secondItem="wge-31-uVE" secondAttribute="height" multiplier="0.35" id="b3X-cV-FCG"/>
+                                            <constraint firstItem="EFa-kK-JBG" firstAttribute="height" secondItem="wge-31-uVE" secondAttribute="height" multiplier="0.3" id="Vj8-dm-cV9" userLabel="Label Terms And Policies.height = 0.4 × height"/>
+                                            <constraint firstItem="4gA-hC-OTu" firstAttribute="height" secondItem="wge-31-uVE" secondAttribute="height" multiplier="0.4" id="b3X-cV-FCG"/>
+                                            <constraint firstItem="bdg-NE-Bs3" firstAttribute="height" secondItem="wge-31-uVE" secondAttribute="height" multiplier="0.3" id="yQa-QU-9sd"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -102,7 +109,8 @@
                     <connections>
                         <outlet property="centXConstraintUIStackView" destination="9iC-R2-kEC" id="469-TQ-RXO"/>
                         <outlet property="emailTextField" destination="oU7-Jh-CGP" id="KAg-mQ-ETB"/>
-                        <outlet property="labelTermsAndPolicies" destination="EFa-kK-JBG" id="gHn-1l-hkX"/>
+                        <outlet property="labelPolicies" destination="bdg-NE-Bs3" id="cwq-k3-s7X"/>
+                        <outlet property="labelTerms" destination="EFa-kK-JBG" id="EoN-kN-Oa9"/>
                         <outlet property="loginButton" destination="4gA-hC-OTu" id="QJ7-RZ-ZDG"/>
                         <outlet property="passwordTextField" destination="zIx-P2-9SC" id="0jz-Tk-QUJ"/>
                         <segue destination="cOc-bK-xlA" kind="show" identifier="segueScrollView" id="uHr-YU-VaC"/>

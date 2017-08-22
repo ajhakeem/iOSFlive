@@ -14,7 +14,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var fieldsValid : Bool = false
-    @IBOutlet weak var labelTermsAndPolicies: UILabel!
+    
+    @IBOutlet weak var labelTerms: UILabel!
+    @IBOutlet weak var labelPolicies: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     var isSuccessful : Bool = true
     var loginParams = [String : String]()
@@ -102,7 +104,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
                 
             else {
-                let alert = alertUser(title: "Fields empty", message: "Please fill out the required fields")
+                let alert = alertUser(title: "Fields empty", message: "Please fill out the email and password fields")
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -181,33 +183,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func initUI() {
-        labelTermsAndPolicies.text = const.TERMS_AND_POLICIES_AGREEMENT
-        let labelText = labelTermsAndPolicies.text!
-        let underlineTermsAndPolicies = NSMutableAttributedString(string : labelText)
-        let termsRange = (labelText as NSString).range(of: "Terms of Use")
-        let policiesRange = (labelText as NSString).range(of: "Privacy Policy")
-        underlineTermsAndPolicies.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: termsRange)
-        underlineTermsAndPolicies.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: termsRange)
-        underlineTermsAndPolicies.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: policiesRange)
-        underlineTermsAndPolicies.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: policiesRange)
+        self.labelTerms.text = const.TERMS_AGREEMENT
+        self.labelPolicies.text = const.POLICIES_AGREEMENT
+        let labelText = (labelTerms.text)!
+        let policiesText = labelPolicies.text!
         
-        labelTermsAndPolicies.attributedText = underlineTermsAndPolicies
+        let underlineTerms = NSMutableAttributedString(string : labelText)
+        let underlinePolicies = NSMutableAttributedString(string : policiesText)
+        let termsRange = (labelText as NSString).range(of: "Terms of Use")
+        let policiesRange = (policiesText as NSString).range(of: "Privacy Policy")
+        underlineTerms.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: termsRange)
+        underlineTerms.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: termsRange)
+        underlinePolicies.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: policiesRange)
+        underlinePolicies.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: policiesRange)
+        
+        labelTerms.attributedText = underlineTerms
+        labelPolicies.attributedText = underlinePolicies
         
         loginButton.layer.cornerRadius = 10
         loginButton.clipsToBounds = true
         
-        let termsTapGesture = UITapGestureRecognizer.init(target: self, action: #selector(ViewController.labelTap(sender:)))
-        labelTermsAndPolicies.isUserInteractionEnabled = true
-        labelTermsAndPolicies.addGestureRecognizer(termsTapGesture)
+        let termsTapGesture = UITapGestureRecognizer.init(target: self, action: #selector(ViewController.termsTap(sender:)))
+        labelTerms.isUserInteractionEnabled = true
+        labelTerms.addGestureRecognizer(termsTapGesture)
+        
+        let policiesTapGesture = UITapGestureRecognizer.init(target: self, action: #selector(ViewController.policiesTap(sender:)))
+        labelPolicies.isUserInteractionEnabled = true
+        labelPolicies.addGestureRecognizer(policiesTapGesture)
         
         self.centXConstraintUIStackView.constant = 0
         
     }
     
-    func labelTap(sender: UITapGestureRecognizer) {
+    func termsTap(sender: UITapGestureRecognizer) {
         print("Tapped")
         
         if let url = NSURL(string: const.TERMS_OF_USE_URL){
+            UIApplication.shared.openURL(url as URL)
+        }
+    }
+    
+    func policiesTap(sender: UITapGestureRecognizer) {
+        print("Policies")
+    
+        if let url = NSURL(string: const.PRIVACY_POLICY_URL) {
             UIApplication.shared.openURL(url as URL)
         }
     }

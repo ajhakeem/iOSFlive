@@ -22,7 +22,8 @@ struct Constants {
     let WEBSOCKET_URI = "ws://analytics.fanadnetwork.com/ws"
     var userToken = ""
     
-    let TERMS_AND_POLICIES_AGREEMENT = "I have read and agree to the Terms of Use and Privacy Policy"
+    let TERMS_AGREEMENT = "By logging in, I have read and agree to the Terms of Use"
+    let POLICIES_AGREEMENT = " and Privacy Policy"
     
     var mHeaders = [
         "Content-Type" : "application/form-data",

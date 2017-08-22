@@ -286,6 +286,8 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
                 self.isShareDisabled = true
                 self.shareContentStack.isHidden = true
                 self.fbShareButton.isHidden = true
+                let alert = alertUser(title: "Link share", message: "Link shared successfully!")
+                self.present(alert, animated: true, completion: nil)
             }
             
             else {
