@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -123,14 +124,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-sL-9Xw">
-                                <rect key="frame" x="348" y="28" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="❌"/>
-                                <connections>
-                                    <action selector="closeButton:" destination="cOc-bK-xlA" eventType="touchUpInside" id="QyW-jX-WSo"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWe-bA-5wO" userLabel="BlogSelectStack">
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="147.33333333333337"/>
                                 <subviews>
@@ -188,31 +181,32 @@
                                 </constraints>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="xfB-80-9OI" userLabel="ShareLinkStack">
-                                <rect key="frame" x="158.33333333333331" y="161" width="97.999999999999943" height="30"/>
+                                <rect key="frame" x="22" y="159.33333333333334" width="376.66666666666669" height="33.333333333333314"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRK-lC-g5F">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRK-lC-g5F" userLabel="FBShareButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="33.333333333333314"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="b0m-Pr-soX"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="fb_logo"/>
                                         <connections>
+                                            <action selector="fbClickAction:" destination="cOc-bK-xlA" eventType="touchUpInside" id="Act-WI-xxM"/>
                                             <action selector="shareToFBButton:" destination="cOc-bK-xlA" eventType="touchUpInside" id="Dk3-Zg-sUm"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6G-rp-Cqi" userLabel="ShareContentStack">
-                                        <rect key="frame" x="33" y="0.0" width="64.999999999999972" height="30"/>
+                                        <rect key="frame" x="33" y="0.0" width="343.66666666666669" height="33.333333333333314"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n3W-zv-Syb">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Share 'I'm live!' to FB" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n3W-zv-Syb" userLabel="ShareMessageField">
+                                                <rect key="frame" x="0.0" y="0.0" width="310.66666666666669" height="33.333333333333314"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mNG-1J-WrM">
-                                                <rect key="frame" x="25" y="0.0" width="39.999999999999972" height="30"/>
-                                                <color key="backgroundColor" red="1" green="0.0" blue="0.17881432159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Share">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mNG-1J-WrM" userLabel="ShareButton">
+                                                <rect key="frame" x="310.66666666666669" y="0.0" width="33" height="33.333333333333314"/>
+                                                <state key="normal" image="shareImage">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -224,7 +218,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="GRK-lC-g5F" firstAttribute="centerY" secondItem="xfB-80-9OI" secondAttribute="centerY" id="1JL-ZK-rwN"/>
-                                    <constraint firstAttribute="height" constant="30" id="OVM-Rv-vCI"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAi-kQ-bG8">
@@ -233,15 +226,53 @@
                                 <color key="textColor" red="1" green="0.06950727541403523" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" translatesAutoresizingMaskIntoConstraints="NO" id="JXa-z7-7TZ" userLabel="AirTimerStack">
+                                <rect key="frame" x="164" y="40" width="86" height="14.333333333333336"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On-air:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbF-p6-OMz">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="14.333333333333336"/>
+                                        <color key="backgroundColor" red="1" green="0.0198914904" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3I-iE-asn">
+                                        <rect key="frame" x="43" y="0.0" width="43" height="14.333333333333336"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="rbF-p6-OMz" firstAttribute="width" secondItem="JXa-z7-7TZ" secondAttribute="width" multiplier="0.5" id="cLN-d4-EqR"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-sL-9Xw">
+                                <rect key="frame" x="356" y="28" width="30" height="30"/>
+                                <state key="normal" title="❌"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="cOc-bK-xlA" eventType="touchUpInside" id="ns2-MU-ORN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="e8U-qO-BUs" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" id="3Gq-4S-2F6"/>
                             <constraint firstItem="sWe-bA-5wO" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" id="3Ta-XY-LSu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zFF-sL-9Xw" secondAttribute="trailing" constant="8" id="5Px-dc-fvS"/>
                             <constraint firstItem="sWe-bA-5wO" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="5Qq-19-ug6"/>
+                            <constraint firstItem="xfB-80-9OI" firstAttribute="height" secondItem="RQx-Z3-f1P" secondAttribute="height" multiplier="0.045" id="EsQ-2t-K0G"/>
                             <constraint firstItem="xfB-80-9OI" firstAttribute="centerY" secondItem="RQx-Z3-f1P" secondAttribute="centerY" constant="-192" id="JsP-Dl-b3f"/>
+                            <constraint firstItem="mNG-1J-WrM" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" multiplier="0.08" id="KIO-RF-yVK"/>
+                            <constraint firstItem="zFF-sL-9Xw" firstAttribute="top" secondItem="KUq-en-OqZ" secondAttribute="bottom" constant="8" id="Pua-Ht-67q"/>
+                            <constraint firstItem="mNG-1J-WrM" firstAttribute="height" secondItem="RQx-Z3-f1P" secondAttribute="height" multiplier="0.04" id="SlR-gT-pQD"/>
                             <constraint firstItem="hAi-kQ-bG8" firstAttribute="centerY" secondItem="RQx-Z3-f1P" secondAttribute="centerY" id="azw-P6-Zhp"/>
+                            <constraint firstItem="JXa-z7-7TZ" firstAttribute="top" secondItem="KUq-en-OqZ" secondAttribute="bottom" multiplier="2" id="dsa-x6-7VJ"/>
+                            <constraint firstItem="JXa-z7-7TZ" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="ezH-Gf-ZRe"/>
+                            <constraint firstItem="xfB-80-9OI" firstAttribute="leading" secondItem="RQx-Z3-f1P" secondAttribute="leadingMargin" multiplier="1.1" id="f1G-Oc-UuW"/>
+                            <constraint firstItem="n3W-zv-Syb" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" multiplier="0.75" id="izV-kd-5pk"/>
                             <constraint firstItem="toK-8I-DMH" firstAttribute="top" secondItem="sWe-bA-5wO" secondAttribute="bottom" constant="1.1368683772161603e-13" id="nrY-98-aCd"/>
-                            <constraint firstItem="xfB-80-9OI" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="q4Y-4n-X39"/>
                             <constraint firstItem="sWe-bA-5wO" firstAttribute="height" secondItem="RQx-Z3-f1P" secondAttribute="height" multiplier="0.2" id="r3Z-Ea-jrt"/>
                             <constraint firstItem="hAi-kQ-bG8" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="vns-Eu-zAc"/>
                         </constraints>
@@ -249,11 +280,16 @@
                     <connections>
                         <outlet property="StackBlogSelect" destination="sWe-bA-5wO" id="E0D-9U-Nvj"/>
                         <outlet property="StackScrollView" destination="sWe-bA-5wO" id="4al-AP-0Up"/>
+                        <outlet property="airTimerStackView" destination="JXa-z7-7TZ" id="bDt-4S-tU7"/>
                         <outlet property="botConstraintBlogSelect" destination="nrY-98-aCd" id="WjJ-ti-qZW"/>
                         <outlet property="cv" destination="e8U-qO-BUs" id="TzG-Z7-gEO"/>
+                        <outlet property="fbShareButton" destination="GRK-lC-g5F" id="NYA-Au-hkP"/>
+                        <outlet property="onAirStatusLabel" destination="rbF-p6-OMz" id="JHh-gd-CrM"/>
+                        <outlet property="onAirTimerLabel" destination="n3I-iE-asn" id="gVg-Xy-e8h"/>
                         <outlet property="selectBlogLabel" destination="gAg-V5-Sz2" id="SJA-iw-fsF"/>
                         <outlet property="shareContentStack" destination="Q6G-rp-Cqi" id="JaE-vd-0Bn"/>
                         <outlet property="shareLinkStack" destination="xfB-80-9OI" id="mG8-ai-At7"/>
+                        <outlet property="shareMessageField" destination="n3W-zv-Syb" id="e01-nc-0f3"/>
                         <outlet property="timerLabel" destination="hAi-kQ-bG8" id="nK8-bs-1Hf"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="segueLogin" id="szg-sk-1eM"/>
                     </connections>
@@ -267,5 +303,6 @@
         <image name="fb_logo" width="100" height="100"/>
         <image name="flive_splash" width="540" height="960"/>
         <image name="page_select_background_selected" width="200" height="200"/>
+        <image name="shareImage" width="512" height="512"/>
     </resources>
 </document>

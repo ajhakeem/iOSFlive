@@ -26,15 +26,16 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     @IBOutlet weak var shareLinkStack: UIStackView!
     @IBOutlet weak var liveButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var fbShareButton: UIButton!
     
     @IBOutlet weak var selectBlogLabel: UILabel!
     var timerSeconds = 4
     var isCountdownFinished = false
     var countdownTimer = Timer()
-    var onAirTimer = Timer()
     
     let stream = LFLiveStreamInfo()
     
+    var isShareDisabled = false
     var isStreaming = false
     var isLivePrepared = false
     var isPageSelectExpanded : Bool = true
@@ -58,18 +59,21 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var viewCell1: viewCell!
     
+// Share Elements
+    @IBOutlet weak var shareMessageField: UITextField!
     
-//    let collectionView : UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        cv.backgroundColor = UIColor.darkGray
-//        
-//        return cv
-//    }()
-//    let cellId = "blogCell"
     
-        
+// Timer Elements
+    var airCounter = 0.0
+    var isAirTimerRunning = false
+    var onAirTimer = Timer()
+    @IBOutlet weak var onAirStatusLabel: UILabel!
+    @IBOutlet weak var onAirTimerLabel: UILabel!
+    @IBOutlet weak var airTimerStackView: UIStackView!
+    
+    
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,6 +87,10 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         self.view.addSubview(closeButton)
         self.view.addSubview(cameraButton)
         self.view.addSubview(startLiveButton)
+//        cv.delegate = self
+//        cv.dataSource = self
+        self.shareContentStack.isHidden = true
+        self.shareLinkStack.isHidden = true
         
         userSession = UserDefaults()
         
@@ -90,7 +98,19 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         
         startLiveButton.addTarget(self, action: #selector(didTappedStartLiveButton(_:)), for: .touchUpInside)
         
-        retrievePages()
+        print("HELLO")
+        
+        retrievePages(completion: { (success) in
+            if (success == true) {
+                print("Succeeded in retrieving")
+                self.selectBlogLabel.text = "Select a blog and press record to go live"
+                self.cv.reloadData()
+            }
+            
+            else {
+                print("Failed to retrieve")
+            }
+        })
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -214,7 +234,7 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
 //    }
     
     
-    @IBAction func closeButton(_ sender: UIButton) {
+    @IBAction func closeButton(_ sender: Any) {
         userSession.removeObject(forKey: "userToken")
         self.dismiss(animated: true, completion: nil)
         self.performSegue(withIdentifier: "segueLogin", sender: self)
@@ -223,8 +243,12 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     
     func expandBlogSelect() {
         UIView.animate(withDuration: 0.25, animations: {
+            let w = self.view.bounds.width
+            let h = self.view.bounds.height
             self.botConstraintBlogSelect.constant = 0
-//            self.botConstraintRecordButton.constant = self.isPageSelectExpanded ? 30 : 194
+            self.startLiveButton.center = CGPoint(x: w / 2, y : h * 0.7)
+            self.shareContentStack.isHidden = true
+            self.shareLinkStack.isHidden = true
             self.view.layoutIfNeeded()
         }, completion: { (success) in
             self.isPageSelectExpanded = self.isPageSelectExpanded ? false : true
@@ -233,17 +257,35 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     
     func collapseBlogSelect() {
         UIView.animate(withDuration: 0.25, animations: {
+            let w = self.view.bounds.width
+            let h = self.view.bounds.height
             self.botConstraintBlogSelect.constant = -200
+            self.startLiveButton.center = CGPoint(x: w / 2, y : h * 0.95)
             self.view.layoutIfNeeded()
         }, completion: { (success) in
             self.isPageSelectExpanded = self.isPageSelectExpanded ? false : true
         })
     }
     
+    @IBAction func fbClickAction(_ sender: Any) {
+        fbShareButton.isSelected = !fbShareButton.isSelected
+        if (fbShareButton.isSelected) {
+         self.shareContentStack.isHidden = false
+        }
+        
+        else {
+            self.shareContentStack.isHidden = true
+        }
+        
+    }
+    
     @IBAction func shareButton(_ sender: Any) {
         shareLink(shareCompletion: { (response) in
             if (response == true) {
                 print("Successfully shared!")
+                self.isShareDisabled = true
+                self.shareContentStack.isHidden = true
+                self.fbShareButton.isHidden = true
             }
             
             else {
@@ -265,29 +307,47 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     func shareLink(shareCompletion : @escaping (_ success : Bool) -> ()) {
         var headers = const.mHeaders
         headers["Authorization"] = passedToken
-        let messageParams = [
-            "page_id" : "194300524348319",
-            "link" : "http://hoc.fanadnetwork.com/live",
-            "message" : "This is a test"]
-        
-        let reqUrl = const.PROD_ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
+        let shareMessageString = shareMessageField.text!
 
-        Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: URLEncoding.default, headers: headers)
-            .responseJSON { (response) in
-                print("RESPONSE PRINT")
-                print(response)
-                    if let responseArray = response.result.value as? NSArray {
-                        print(responseArray)
-                        for ind in 0...responseArray.count-1 {
-                            let arrayObject = responseArray[ind] as! [String : AnyObject]
-                            print(arrayObject)
-                        }
+        if (shareMessageString.isEmpty) {
+            let messageParams = [
+                "page_id" : self.selectedPageBlogId,
+                "link" : self.selectedPageBlogUrl,
+                "message" : shareMessageField.placeholder!]
+            
+            let reqUrl = const.PROD_ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
+            
+            Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: URLEncoding.default, headers: headers)
+                .validate()
+                .responseJSON { (response) in
+                    switch response.result {
+                    case .success:
                         shareCompletion(true)
-                    }
-                
-                    else {
+                    case .failure:
                         shareCompletion(false)
-                }
+                    }
+            }
+        }
+        
+        else {
+            let messageParams = [
+                "page_id" : self.selectedPageBlogId,
+                "link" : self.selectedPageBlogUrl,
+                "message" : shareMessageField.text!]
+            
+            let reqUrl = const.PROD_ROOT_URL + const.BASE_URI + const.SHARE_LINK_URI
+            
+            Alamofire.request(URL(string: reqUrl)!, method: .get, parameters: messageParams, encoding: URLEncoding.default, headers: headers)
+                .validate()
+                .responseJSON { (response) in
+                    switch response.result {
+                    case .success:
+                        shareCompletion(true)
+                    case .failure:
+                        shareCompletion(false)
+                    }
+            }
+
         }
     }
     
@@ -296,24 +356,23 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         // Dispose of any resources that can be recreated.
     }
     
-    func retrievePages() {
+    func retrievePages(completion : @escaping (_ success : Bool) -> ()) {
+        print("HEY HEY ")
         self.pageNames = pageObject.getPageNames(authToken: passedToken, completion: { (arrayResponse) in
             if ((arrayResponse?.count)! > 0) {
-                print("Succeeded in retrieving")
-                self.selectBlogLabel.text = "Select a blog and press record to go live"
                 self.pageNames = arrayResponse! as! [String]
-                self.cv.reloadData()
+                completion(true)
             }
             
             if (arrayResponse == nil) {
-                print("Failed to retrieve")
+                completion(false)
             }
         })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "segueLogin") {
-            let loginVC = segue.destination as! ViewController
+            _ = segue.destination as! ViewController
         }
     }
     
@@ -443,7 +502,10 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
                 resetTimer()
                 startLiveButton.setImage(startLiveImg, for: UIControlState())
                 self.expandBlogSelect()
+                isShareDisabled = false
                 session.stopLive()
+                closeButton.isHidden = false
+                stopAirTimer()
                 self.isStreaming = false
             }
         }
@@ -456,41 +518,60 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         self.timerSeconds = 4
     }
     
-//    func goLive(completion : @escaping (_ success : Bool) -> ()) {
-//        if (selectedPageDetails.count > 0) {
-//            self.selectedPageBlogUrl = (self.selectedPageDetails["blog_url"] as? String)!
-//            if self.selectedPageBlogUrl is NSNull {
-//                return
-//            }
-//            self.selectedPageVerified = selectedPageDetails["verified"] as! String
-//            self.selectedPageBlogId = selectedPageDetails["page_id"] as! String
-//            
-//            if ((self.selectedPageVerified == "1") && (self.selectedPageBlogUrl != nil) && (type(of: self.selectedPageBlogUrl) != NSNull.self) && (!self.selectedPageBlogUrl.isEmpty)) {
-//                print("PAGE VERIFIED")
-//                liveGateway.getStreamKey(authToken: passedToken, selectedPageId: selectedPageBlogId, completion: { (retrievedStream) in
-//                    if (retrievedStream != nil) {
-//                        self.retrievedStreamKey = ""
-//                        self.retrievedStreamKey = retrievedStream!
-//                        let streamBaseUrl : String = "rtmp://54.201.16.95:1935/live/"
-//                        print("Successfully retrieved stream key!")
-//                        print(self.retrievedStreamKey)
-//                        self.streamKey = ""
-//                        self.streamKey = streamBaseUrl + self.retrievedStreamKey
-//                        completion(true)
-//                    }
-//                        
-//                    else {
-//                        print("Failed to retrieve stream key")
-//                        completion(false)
-//                    }
-//                })
-//            }
-//                
-//            else {
-//                print("This page is not verified")
-//            }
-//        }
-//    }
+    func updateTimerLabel() {
+        
+        if (self.timerSeconds == 0) {
+            self.timerLabel.text = ""
+            countdownTimer.invalidate()
+            
+            if (!countdownTimer.isValid) {
+                if (!isInternetAvailable()) {
+                    resetTimer()
+                    resetButtons()
+                    expandBlogSelect()
+                    let alert = alertUser(title: "Network error", message: "No connection exists")
+                    self.present(alert, animated: true, completion: nil)
+                    selectedPageDetails.removeAll()
+                }
+                    
+                else {
+                    isCountdownFinished = true
+                    startStreaming()
+                    self.shareLinkStack.isHidden = false
+                }
+            }
+        }
+            
+        else {
+            self.timerSeconds -= 1
+            self.timerLabel.text = "\(timerSeconds)"
+        }
+    }
+    
+    //TAGTIMER
+    
+    func startAirTimer() {
+        if (isAirTimerRunning) {
+            return
+        }
+        
+        onAirTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateAirTimer), userInfo: nil, repeats: true)
+        onAirTimer.fire()
+        isAirTimerRunning = true
+    }
+    
+    func stopAirTimer() {
+        onAirTimer.invalidate()
+        airTimerStackView.isHidden = true
+        isAirTimerRunning = false
+        onAirTimerLabel.text = ""
+        airCounter = 0.0
+    }
+    
+    func updateAirTimer() {
+        airCounter += 0.1
+        onAirTimerLabel.text = String(format: "%.1f", airCounter)
+    }
     
     func goLive2(completion : @escaping (_ success : Bool) -> ()) {
         if (self.selectedPageDetails.isEmpty) {
@@ -514,7 +595,6 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
             }
             
             if ((self.selectedPageVerified == "1") && (self.selectedPageBlogUrl != nil) && (type(of: self.selectedPageBlogUrl) != NSNull.self) && (!self.selectedPageBlogUrl.isEmpty)) {
-                shareLinkStack.isHidden = false
                 collapseBlogSelect()
                 
                 liveGateway.getStreamKey(authToken: passedToken, selectedPageId: selectedPageBlogId, completion: { (retrievedStream) in
@@ -547,35 +627,6 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         }
     }
     
-    func updateTimerLabel() {
-        
-        if (self.timerSeconds == 0) {
-            self.timerLabel.text = ""
-            countdownTimer.invalidate()
-            
-            if (!countdownTimer.isValid) {
-                if (!isInternetAvailable()) {
-                    resetTimer()
-                    resetButtons()
-                    expandBlogSelect()
-                    let alert = alertUser(title: "Network error", message: "No connection exists")
-                    self.present(alert, animated: true, completion: nil)
-                    selectedPageDetails.removeAll()
-                }
-                
-                else {
-                    isCountdownFinished = true
-                    startStreaming()
-                }
-            }
-        }
-        
-        else {
-            self.timerSeconds -= 1
-            self.timerLabel.text = "\(timerSeconds)"
-        }
-    }
-    
     func resetButtons() {
         let stopLiveImg = UIImage(named: "liveButton")
         startLiveButton.setImage(stopLiveImg, for: UIControlState())
@@ -583,6 +634,9 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     
     func startStreaming() {
         self.session.startLive(self.stream)
+        closeButton.isHidden = true
+        airTimerStackView.isHidden = false
+        startAirTimer()
         self.isStreaming = true
     }
     
@@ -618,17 +672,18 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         stateLabel.text = "Not Connected"
         stateLabel.textColor = UIColor.white
         stateLabel.font = UIFont.systemFont(ofSize: 14)
+        stateLabel.isHidden = true
         return stateLabel
     }()
     
     var closeButton: UIButton = {
-        let closeButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 10 - 44, y: 20, width: 44, height: 44))
+        let closeButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width * 0.95, y: 20, width: 44, height: 44))
         closeButton.setImage(UIImage(named: "close_preview"), for: UIControlState())
         return closeButton
     }()
     
     var cameraButton: UIButton = {
-        let cameraButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 54 * 2, y: 20, width: 44, height: 44))
+        let cameraButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width * 0.05, y: 20, width: 44, height: 44))
         cameraButton.setImage(UIImage(named: "flipCamera"), for: UIControlState())
         return cameraButton
     }()

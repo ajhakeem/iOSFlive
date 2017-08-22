@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (token != nil) {
             self.window?.rootViewController = scrollViewVC
-            self.window?.makeKeyAndVisible()
         }
         
         do {
@@ -34,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
         }
-        
+    
         return true
     }
     
