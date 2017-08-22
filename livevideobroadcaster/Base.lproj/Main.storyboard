@@ -64,7 +64,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Policies Text" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-NE-Bs3" userLabel="Label Policies">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Policies Text" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-NE-Bs3" userLabel="Label Policies">
                                                 <rect key="frame" x="0.0" y="33.333333333333314" width="310.66666666666669" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <nil key="textColor"/>
@@ -257,9 +257,9 @@
                                     <constraint firstItem="rbF-p6-OMz" firstAttribute="width" secondItem="JXa-z7-7TZ" secondAttribute="width" multiplier="0.5" id="cLN-d4-EqR"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-sL-9Xw">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-sL-9Xw">
                                 <rect key="frame" x="356" y="28" width="30" height="30"/>
-                                <state key="normal" title="❌"/>
+                                <state key="normal" image="logoutResize"/>
                                 <connections>
                                     <action selector="closeButton:" destination="cOc-bK-xlA" eventType="touchUpInside" id="ns2-MU-ORN"/>
                                 </connections>
@@ -310,6 +310,7 @@
     <resources>
         <image name="fb_logo" width="100" height="100"/>
         <image name="flive_splash" width="540" height="960"/>
+        <image name="logoutResize" width="30" height="30"/>
         <image name="page_select_background_selected" width="200" height="200"/>
         <image name="shareImage" width="512" height="512"/>
     </resources>
