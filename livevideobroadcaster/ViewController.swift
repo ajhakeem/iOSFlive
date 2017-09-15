@@ -30,8 +30,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var centXConstraintUIStackView: NSLayoutConstraint!
     @IBOutlet weak var botConstraintUIStackView: NSLayoutConstraint!
     @IBOutlet weak var widthUIStackView: NSLayoutConstraint!
-    
-    
+    let token = UserDefaults.standard.object(forKey: "userToken")
     
     
     override func viewDidLoad() {
@@ -45,8 +44,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: "keyboardWillShow:", name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: "keyboardWillHide:", name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        initUI()
         checkUserSessionStatus()
+        initUI()
     }
 
     //MARK: UITextFieldDelegate
@@ -115,7 +114,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "segueScrollView") {
             let scrollViewVC = segue.destination as! ScrollViewVC
-            scrollViewVC.passedToken += userToken
+//            scrollViewVC.passedToken += userToken
         }
     
     }

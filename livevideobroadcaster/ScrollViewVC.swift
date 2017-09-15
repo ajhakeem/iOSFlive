@@ -27,6 +27,8 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     @IBOutlet weak var liveButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var fbShareButton: UIButton!
+    @IBOutlet weak var goLiveButton: UIButton!
+    @IBOutlet weak var cameraPreview: UIView!
     
     @IBOutlet weak var selectBlogLabel: UILabel!
     var timerSeconds = 4
@@ -86,7 +88,6 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         self.view.addSubview(stateLabel)
         self.view.addSubview(closeButton)
         self.view.addSubview(cameraButton)
-        self.view.addSubview(startLiveButton)
 //        cv.delegate = self
 //        cv.dataSource = self
         self.shareContentStack.isHidden = true
@@ -95,10 +96,11 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         userSession = UserDefaults()
         
         cameraButton.addTarget(self, action: #selector(didTappedCameraButton(_:)), for:.touchUpInside)
+        goLiveButton.addTarget(self, action: #selector(goLiveClick(_:)), for: .touchUpInside)
         
-        startLiveButton.addTarget(self, action: #selector(didTappedStartLiveButton(_:)), for: .touchUpInside)
+        print("RED")
+        passedToken += userSession.string(forKey: "userToken")!
         
-        print("HELLO")
         
         retrievePages(completion: { (success) in
             if (success == true) {
@@ -111,6 +113,11 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
                 print("Failed to retrieve")
             }
         })
+    }
+
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -159,6 +166,54 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 return CGSize(width: CGFloat((view.bounds.width) / 2.5), height: view.bounds.height * 0.15)
             }
+    
+    @IBAction func goLiveClick(_ sender: UIButton) {
+        goLiveButton.isSelected = !goLiveButton.isSelected
+        
+        if (!checkConnection()) {
+            let alert = alertUser(title: "Check connection", message: "Please check your internet connection and try again")
+            self.present(alert, animated: true, completion: nil)
+        }
+            
+        else {
+            if (goLiveButton.isSelected) {
+                if (!selectedPageDetails.isEmpty) {
+                    goLiveButton.setImage(stopLiveImg, for: UIControlState())
+                    goLive2(completion: { (success) in
+                        if (success == true) {
+                            self.collapseBlogSelect()
+                            self.stream.url = String(self.streamKey)
+                            self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ScrollViewVC.updateTimerLabel)), userInfo: nil, repeats: true)
+                            self.countdownTimer.fire()
+                        }
+                            
+                        else {
+                            print("Failed to go live")
+                            return
+                        }
+                    })
+                }
+                    
+                else {
+                    let alert = alertUser(title: "Select blog", message: "Please select a blog and press record to go live")
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+                
+            else {
+                resetTimer()
+                goLiveButton.setImage(startLiveImg, for: UIControlState())
+                self.expandBlogSelect()
+                isShareDisabled = false
+                session.stopLive()
+                closeButton.isHidden = false
+                stopAirTimer()
+                self.isStreaming = false
+            }
+        }
+
+    }
+
     
     
 //    func setupCV() {
@@ -235,9 +290,24 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     
     
     @IBAction func closeButton(_ sender: Any) {
-        userSession.removeObject(forKey: "userToken")
-        self.dismiss(animated: true, completion: nil)
-        self.performSegue(withIdentifier: "segueLogin", sender: self)
+        
+        if (isStreaming) {
+            resetTimer()
+            goLiveButton.setImage(startLiveImg, for: UIControlState())
+            self.expandBlogSelect()
+            isShareDisabled = false
+            session.stopLive()
+            closeButton.isHidden = false
+            stopAirTimer()
+            self.isStreaming = false
+        }
+        
+        else {
+            userSession.removeObject(forKey: "userToken")
+            self.dismiss(animated: true, completion: nil)
+            self.performSegue(withIdentifier: "segueLogin", sender: self)
+        }
+    
     }
     
     
@@ -246,7 +316,7 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
             let w = self.view.bounds.width
             let h = self.view.bounds.height
             self.botConstraintBlogSelect.constant = 0
-            self.startLiveButton.center = CGPoint(x: w / 2, y : h * 0.7)
+            self.goLiveButton.center = CGPoint(x: w / 2, y : h * 0.7)
             self.shareContentStack.isHidden = true
             self.shareLinkStack.isHidden = true
             self.view.layoutIfNeeded()
@@ -256,11 +326,14 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     }
     
     func collapseBlogSelect() {
+        
+        let stackHeight : Int = Int(StackBlogSelect.frame.height)
+        
         UIView.animate(withDuration: 0.25, animations: {
             let w = self.view.bounds.width
             let h = self.view.bounds.height
-            self.botConstraintBlogSelect.constant = -200
-            self.startLiveButton.center = CGPoint(x: w / 2, y : h * 0.95)
+            self.botConstraintBlogSelect.constant = -(CGFloat)(stackHeight)
+            self.goLiveButton.center = CGPoint(x: w / 2, y : h * 0.95)
             self.view.layoutIfNeeded()
         }, completion: { (success) in
             self.isPageSelectExpanded = self.isPageSelectExpanded ? false : true
@@ -283,6 +356,7 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         shareLink(shareCompletion: { (response) in
             if (response == true) {
                 print("Successfully shared!")
+                self.dismissKeyboard()
                 self.isShareDisabled = true
                 self.shareContentStack.isHidden = true
                 self.fbShareButton.isHidden = true
@@ -359,7 +433,8 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     }
     
     func retrievePages(completion : @escaping (_ success : Bool) -> ()) {
-        print("HEY HEY ")
+        print("YELLOW")
+        print("PASSED TOKEN : " + "\(passedToken)")
         self.pageNames = pageObject.getPageNames(authToken: passedToken, completion: { (arrayResponse) in
             if ((arrayResponse?.count)! > 0) {
                 self.pageNames = arrayResponse! as! [String]
@@ -468,50 +543,6 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         }
     }
     
-    func didTappedStartLiveButton(_ button: UIButton) -> Void {
-        startLiveButton.isSelected = !startLiveButton.isSelected;
-        if (!checkConnection()) {
-            let alert = alertUser(title: "Check connection", message: "Please check your internet connection and try again")
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        else {
-            if (startLiveButton.isSelected) {
-                if (!selectedPageDetails.isEmpty) {
-                    startLiveButton.setImage(stopLiveImg, for: UIControlState())
-                    goLive2(completion: { (success) in
-                        if (success == true) {
-                            self.collapseBlogSelect()
-                            self.stream.url = String(self.streamKey)
-                            self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ScrollViewVC.updateTimerLabel)), userInfo: nil, repeats: true)
-                            self.countdownTimer.fire()
-                        }
-                            
-                        else {
-                            print("Failed to go live")
-                            return
-                        }
-                    })
-                }
-                
-                else {
-                    let alert = alertUser(title: "Select blog", message: "Please select a blog and press record to go live")
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-                
-            else {
-                resetTimer()
-                startLiveButton.setImage(startLiveImg, for: UIControlState())
-                self.expandBlogSelect()
-                isShareDisabled = false
-                session.stopLive()
-                closeButton.isHidden = false
-                stopAirTimer()
-                self.isStreaming = false
-            }
-        }
-    }
     
     func resetTimer() {
         countdownTimer.invalidate()
@@ -522,7 +553,7 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     
     func updateTimerLabel() {
         
-        if (self.timerSeconds == 0) {
+        if (self.timerSeconds < 2) {
             self.timerLabel.text = ""
             countdownTimer.invalidate()
             
@@ -557,7 +588,7 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
             return
         }
         
-        onAirTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateAirTimer), userInfo: nil, repeats: true)
+        onAirTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateAirTimer), userInfo: nil, repeats: true)
         onAirTimer.fire()
         isAirTimerRunning = true
     }
@@ -571,8 +602,8 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     }
     
     func updateAirTimer() {
-        airCounter += 0.1
-        onAirTimerLabel.text = String(format: "%.1f", airCounter)
+        airCounter += 1
+        onAirTimerLabel.text = String(format: "%.0f", airCounter)
     }
     
     func goLive2(completion : @escaping (_ success : Bool) -> ()) {
@@ -631,7 +662,7 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
     
     func resetButtons() {
         let stopLiveImg = UIImage(named: "liveButton")
-        startLiveButton.setImage(stopLiveImg, for: UIControlState())
+        goLiveButton.setImage(stopLiveImg, for: UIControlState())
     }
     
     func startStreaming() {
@@ -688,20 +719,6 @@ class ScrollViewVC : UIViewController, LFLiveSessionDelegate, UICollectionViewDe
         let cameraButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width * 0.05, y: 20, width: 44, height: 44))
         cameraButton.setImage(UIImage(named: "flipCamera"), for: UIControlState())
         return cameraButton
-    }()
-    
-    var startLiveButton: UIButton = {
-        let w = UIScreen.main.bounds.width
-        let h = UIScreen.main.bounds.height
-        let startLiveButton = UIButton(frame: CGRect(x: 0, y: 0, width: 75, height: 75))
-        startLiveButton.center = CGPoint(x: w / 2, y : h * 0.7)
-        startLiveButton.layer.cornerRadius = 22
-        
-        let startLiveImg = UIImage(named: "liveButton")
-        startLiveButton.setImage(startLiveImg, for: UIControlState())
-        startLiveButton.setTitleColor(UIColor.black, for:UIControlState())
-        startLiveButton.titleLabel!.font = UIFont.systemFont(ofSize: 14)
-        return startLiveButton
     }()
     
 }

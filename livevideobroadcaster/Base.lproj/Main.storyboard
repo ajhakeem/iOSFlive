@@ -132,6 +132,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESD-II-xXz" userLabel="LiveButton">
+                                <rect key="frame" x="140" y="465" width="135" height="100"/>
+                                <state key="normal" image="liveButton"/>
+                                <connections>
+                                    <action selector="goLiveClick:" destination="cOc-bK-xlA" eventType="touchUpInside" id="ESx-53-T14"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWe-bA-5wO" userLabel="BlogSelectStack">
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="147.33333333333337"/>
                                 <subviews>
@@ -235,17 +242,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" translatesAutoresizingMaskIntoConstraints="NO" id="JXa-z7-7TZ" userLabel="AirTimerStack">
-                                <rect key="frame" x="164" y="40" width="86" height="14.333333333333336"/>
+                                <rect key="frame" x="155.33333333333331" y="40" width="103.33333333333331" height="14.333333333333336"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On-air:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbF-p6-OMz">
-                                        <rect key="frame" x="0.0" y="0.0" width="43" height="14.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="51.666666666666657" height="14.333333333333336"/>
                                         <color key="backgroundColor" red="1" green="0.0198914904" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3I-iE-asn">
-                                        <rect key="frame" x="43" y="0.0" width="43" height="14.333333333333336"/>
+                                        <rect key="frame" x="51.666666666666657" y="0.0" width="51.666666666666686" height="14.333333333333336"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -257,7 +264,7 @@
                                     <constraint firstItem="rbF-p6-OMz" firstAttribute="width" secondItem="JXa-z7-7TZ" secondAttribute="width" multiplier="0.5" id="cLN-d4-EqR"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-sL-9Xw">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-sL-9Xw" userLabel="LogoutButton">
                                 <rect key="frame" x="356" y="28" width="30" height="30"/>
                                 <state key="normal" image="logoutResize"/>
                                 <connections>
@@ -268,13 +275,16 @@
                         <constraints>
                             <constraint firstItem="e8U-qO-BUs" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" id="3Gq-4S-2F6"/>
                             <constraint firstItem="sWe-bA-5wO" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" id="3Ta-XY-LSu"/>
+                            <constraint firstItem="JXa-z7-7TZ" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" multiplier="0.25" id="3iN-mt-w53"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zFF-sL-9Xw" secondAttribute="trailing" constant="8" id="5Px-dc-fvS"/>
                             <constraint firstItem="sWe-bA-5wO" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="5Qq-19-ug6"/>
                             <constraint firstItem="xfB-80-9OI" firstAttribute="height" secondItem="RQx-Z3-f1P" secondAttribute="height" multiplier="0.045" id="EsQ-2t-K0G"/>
                             <constraint firstItem="xfB-80-9OI" firstAttribute="centerY" secondItem="RQx-Z3-f1P" secondAttribute="centerY" constant="-192" id="JsP-Dl-b3f"/>
                             <constraint firstItem="mNG-1J-WrM" firstAttribute="width" secondItem="RQx-Z3-f1P" secondAttribute="width" multiplier="0.08" id="KIO-RF-yVK"/>
+                            <constraint firstItem="sWe-bA-5wO" firstAttribute="top" secondItem="ESD-II-xXz" secondAttribute="bottom" constant="30" id="LAK-iZ-IlA"/>
                             <constraint firstItem="zFF-sL-9Xw" firstAttribute="top" secondItem="KUq-en-OqZ" secondAttribute="bottom" constant="8" id="Pua-Ht-67q"/>
                             <constraint firstItem="mNG-1J-WrM" firstAttribute="height" secondItem="RQx-Z3-f1P" secondAttribute="height" multiplier="0.04" id="SlR-gT-pQD"/>
+                            <constraint firstItem="ESD-II-xXz" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="Tns-I0-6Mw"/>
                             <constraint firstItem="hAi-kQ-bG8" firstAttribute="centerY" secondItem="RQx-Z3-f1P" secondAttribute="centerY" id="azw-P6-Zhp"/>
                             <constraint firstItem="JXa-z7-7TZ" firstAttribute="top" secondItem="KUq-en-OqZ" secondAttribute="bottom" multiplier="2" id="dsa-x6-7VJ"/>
                             <constraint firstItem="JXa-z7-7TZ" firstAttribute="centerX" secondItem="RQx-Z3-f1P" secondAttribute="centerX" id="ezH-Gf-ZRe"/>
@@ -292,6 +302,7 @@
                         <outlet property="botConstraintBlogSelect" destination="nrY-98-aCd" id="WjJ-ti-qZW"/>
                         <outlet property="cv" destination="e8U-qO-BUs" id="TzG-Z7-gEO"/>
                         <outlet property="fbShareButton" destination="GRK-lC-g5F" id="NYA-Au-hkP"/>
+                        <outlet property="goLiveButton" destination="ESD-II-xXz" id="azr-lg-VHD"/>
                         <outlet property="onAirStatusLabel" destination="rbF-p6-OMz" id="JHh-gd-CrM"/>
                         <outlet property="onAirTimerLabel" destination="n3I-iE-asn" id="gVg-Xy-e8h"/>
                         <outlet property="selectBlogLabel" destination="gAg-V5-Sz2" id="SJA-iw-fsF"/>
@@ -310,6 +321,7 @@
     <resources>
         <image name="fb_logo" width="100" height="100"/>
         <image name="flive_splash" width="540" height="960"/>
+        <image name="liveButton" width="83" height="83"/>
         <image name="logoutResize" width="30" height="30"/>
         <image name="page_select_background_selected" width="200" height="200"/>
         <image name="shareImage" width="512" height="512"/>

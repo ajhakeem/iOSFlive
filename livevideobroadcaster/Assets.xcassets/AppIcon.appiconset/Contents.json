@@ -31,8 +31,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "logors.png",
       "scale" : "2x"
     },
     {
@@ -73,7 +74,7 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "logoResize.png",
+      "filename" : "logors-1.png",
       "scale" : "1x"
     },
     {
